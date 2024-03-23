@@ -6,6 +6,6 @@ public class App {
 
         Plateau board = new Plateau();
         board.getCases()[18].moveOneCase("up", 17);
+        System.out.println("hello");
     }
 }
-
