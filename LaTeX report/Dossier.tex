@@ -1,0 +1,90 @@
+% Document class
+\documentclass[titlepage]{report}
+
+% Packages
+\usepackage{lipsum,eurosym,enumitem,multicol,hyperref,geometry,graphicx,float,listings}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[french]{babel}
+\usepackage{subfig}
+\usepackage{listings}
+\usepackage{qrcode}
+\usepackage{ragged2e}
+
+% Document geometry
+\geometry{paper=a4paper,textwidth=16cm}
+
+% Definition of \maketitle
+\title{Projet de Programmation Java : MoonQuest}
+\author{Par : Lucien Piat \\ \vspace{.5cm} Sous la direction de : Karkar Slim}
+\date{Avril 2024}
+
+\makeatletter         
+\def\maketitle{
+\raggedright
+\begin{center}
+\includegraphics[width = 0.5\textwidth]{img/logo_ub.png}\\[15ex]
+{\Huge \bfseries \@title }\\[10ex] 
+{\huge  \@author}\\[10ex] 
+{\Large \@date}\\
+\end{center}}
+\makeatother
+
+
+% Debut du Document
+\begin{document}
+\maketitle
+\thispagestyle{empty} 
+\newpage
+\tableofcontents
+\thispagestyle{empty} 
+
+%Debut du sujet 
+\newpage
+\pagenumbering{arabic}
+\justify 
+\section{Introduction}
+
+Java est un language de programmation orienté objet qui permet de produire des applications sécurisé et 
+offre une portabilité avancée du code grace a une machine virtuelle.\\
+
+Lors de ce project de programmation, nous développerons le jeu "MoonQuest" grace à cet outil.  
+
+\section{Analyse du Sujet}
+
+Le jeu MoonQuest est présenté sous la forme d'un échiquier sur lequel des pieces sont placées.
+Ces dernières sont des candidates parfaites pour êtres codées par des classes en Java.
+Ainsi, nous essaieront de réduire au maximum les répétitions de code en créant un maximum de sous classes pour généraliser les objets manipulés.\\
+
+Le plateau en lui même est pourra être une classe contenant toutes les cases. Ces cases pourront stocker les différentes pieces du plateau.\\
+
+De nombreuses règles sont présentes dans le jeu, elle seront implémentées sous forme de méthodes() qui seront contenues dans les sous classes.
+l’utilisation de super() nous permettra de moduler la réponse des méthodes en fonction de la sous classe utilisée.\\
+
+Un des enjeux est de faire apparaître le plateau a l'écran. En effet, il faudra afficher les différentes cases et leurs contenu a chaque tour.
+D'autre part, nous aurons besoins des menus pour permettre au joueur d’interagie avec le programme.\\
+
+Enfin, nous implémenterons dans une classe Main, toutes les boucles qui appellent les différentes méthodes pour le bon déroulement de la partie.\\
+
+\noindent Ainsi, voici comment nous pouvons décortiquer le sujet :\\
+\begin{itemize}[label=$\bullet$] 
+    \item Les différentes pieces seront des Classes parentes
+    \item Le plateau sera une classe contenant les pieces
+    \item Les règles du jeu seront codées dans les méthodes des classes
+    \item Une affichage aura lieu a chaque tour
+    \item Une boucle principale se chargera d'appeler les méthodes d'affichage et de déplacement.
+\end{itemize}
+
+\section{Solutions Envisagées}
+
+\subsection{Pour Le Plateau}
+\subsection{Pour Les Objets}
+\subsection{Pour l’Affichage}
+
+\section{Algorithmes Choisis}
+
+\section{Conclusion}
+Jar
+
+\end{document}
