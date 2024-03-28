@@ -94,7 +94,7 @@ public class Case extends JLabel {
     /**
      * Configure l'apparence de la case.
      */    
-    void set() {
+    public void set() {
         setOpaque(true);
         setBackground(bgCase); 
         setHorizontalAlignment(SwingConstants.CENTER);
@@ -105,40 +105,52 @@ public class Case extends JLabel {
         setFont(font);
     }
 
-    public void moveOneCase(String direction, int boardSize){
-        char[] alphabetArray = new char[boardSize - 1];
-        int[] intArray = new int[boardSize - 1];
+    private String findRightChar(String currentChar, int boardSize, int way) {
+        String[] alphabetArray = new String[boardSize - 1];
+        String[] numArray = new String[boardSize - 1];
         char startChar = 'A';
-        int startInt = 1; 
+        int startInt = 1;
         for (int i = 0; i < boardSize - 1; i++) {
-            alphabetArray[i] = startChar++;
-            intArray[i] = startInt++;
+          alphabetArray[i] = String.valueOf(startChar++);
+          numArray[i] = String.valueOf(startInt++);
         }
-
+      
+        int currentIndex = 0;
+        if (Character.isLetter(currentChar.charAt(0))) {
+          for (int y = 0; y < boardSize - 1; y++) {
+            if (alphabetArray[y].equals(currentChar)) {
+              currentIndex = y;
+              break;
+            }
+          }
+        } else {
+          for (int y = 0; y < boardSize - 1; y++) {
+            if (numArray[y].equals(currentChar)) {
+              currentIndex = y;
+              break;
+            }
+          }
+        }
+      
+        int newIndex = (currentIndex + way + boardSize - 1) % (boardSize - 1); 
+        return Character.isLetter(currentChar.charAt(0)) ? alphabetArray[newIndex] : numArray[newIndex];
+    }
+      
+    public String moveOneCase(String direction, int boardSize) {
         String letterChar = this.nameCase.substring(0, 1);
         String numChar = this.nameCase.substring(1);
-
-        switch(direction) {
-            case "up":
-                System.out.println(letterChar);
-                System.out.println(letterChar);
-                break;
-
-            case "down":
-                // code block
-                break;
-
-            case "left":
-                
-                break;
-
-            case "right" :
-                
-                break; 
-     
-            default:
-              // code block
-          }
+        System.out.println(this.nameCase);
+        switch (direction) {
+          case "up":
+            return letterChar + findRightChar(numChar, boardSize, -1);
+          case "down":
+            return letterChar + findRightChar(numChar, boardSize, 1);
+          case "left":
+            return findRightChar(letterChar, boardSize, -1) + numChar;
+          case "right":
+            return findRightChar(letterChar, boardSize, 1) + numChar;
+          default:
+            return "";
+        }
     }
-
 }

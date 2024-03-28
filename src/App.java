@@ -4,6 +4,6 @@ import objets.*;
 public class App {
     public static void main(String[] args) throws Exception {
         Plateau board = new Plateau();
-        board.getCases()[18].moveOneCase("up", 17);
+        System.out.println(board.getCases()[50].moveOneCase("right", 17));
     }
 }
