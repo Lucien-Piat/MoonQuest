@@ -1,10 +1,13 @@
 package objets.pieces;
 
+import java.awt.Color;
+
 import objets.pieces.abstract_class.Vehicule;
 
-public abstract class VehiculeEau extends Vehicule {
+public class VehiculeEau extends Vehicule {
 
-    public VehiculeEau(){
+    public VehiculeEau(Color player){
         super("Vo"); 
+        this.player = player;
     }
 }

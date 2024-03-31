@@ -16,13 +16,14 @@ import objets.pieces.abstract_class.Piece;
  */
 public class Case extends JLabel {
 
-    final int fontSize = 25;
+    final int fontSize = 22;
     private Font font = new Font("Arial", Font.PLAIN, fontSize);
     private Color bgCase; 
     private String nameCase;
     private String displayCase; 
     private Vector<Piece> contenu;  
     private boolean side;
+    private Color fontColor = Color.BLACK;
 
     /**
      * Constructeur de la classe Case.
@@ -62,7 +63,6 @@ public class Case extends JLabel {
         }
         if (contenu.size() > 1 ){
             this.font = new Font("Arial", Font.PLAIN, fontSize/contenu.size()+5);
-            System.out.println(fontSize/contenu.size());
         }
         return contentString.toString(); 
     }
@@ -73,6 +73,7 @@ public class Case extends JLabel {
      */
     public void updateDisplay() {
         this.displayCase = extractContent();
+        if (contenu.size() > 0){this.fontColor = contenu.get(0).getPlayer();} 
     }
 
     /**
@@ -95,6 +96,7 @@ public class Case extends JLabel {
      * Configure l'apparence de la case.
      */    
     public void set() {
+
         setOpaque(true);
         setBackground(bgCase); 
         setHorizontalAlignment(SwingConstants.CENTER);
@@ -103,6 +105,7 @@ public class Case extends JLabel {
         }
         setText(displayCase);
         setFont(font);
+        setForeground(fontColor);
     }
 
     private String findRightChar(String currentChar, int boardSize, int way) {

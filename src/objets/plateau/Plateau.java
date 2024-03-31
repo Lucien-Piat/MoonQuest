@@ -2,8 +2,17 @@ package objets.plateau;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
+
 import javax.swing.JFrame;
+
+import objets.pieces.Glace;
+import objets.pieces.NuageEau;
+import objets.pieces.NuageMet;
+import objets.pieces.VehiculeEau;
+import objets.pieces.VehiculeMet;
 import objets.pieces.abstract_class.Piece; 
 
 
@@ -22,7 +31,12 @@ public class Plateau extends JFrame {
      */
     public Plateau() {
         cases = new Case[totalCases]; // Initialise les cases du plateau
+        initialiseCase();
+        initialisePieces();
+        
+    }
 
+    private void initialiseCase(){
         // Création de listes pour les noms des cases
         List<Character> lettreList = new ArrayList<>();
         char lettre = 'A';
@@ -37,7 +51,7 @@ public class Plateau extends JFrame {
         boolean colorToChoose = false;
         for (int index = 0; index < totalCases; index++) {
 
-            // Gérer les mises à jour de lignes et de colonnes
+            // Gestion des mises à jour de lignes et de colonnes
             if (index % boardSize == 0 && index != 0) {
                 currentRow++;
                 currentColumn = 0;
@@ -48,7 +62,6 @@ public class Plateau extends JFrame {
             if (index == 0) {
                 // Si c'est la case de coin
                 cases[index] = new Case(new Color(50, 50, 50), "Coin");
-
             } else if (currentRow == 0) {
                 // Si c'est la premiere ligne
                 cases[index] = new Case(new Color(180, 169, 169), String.valueOf(lettreList.get(currentColumn - 1)));
@@ -72,6 +85,49 @@ public class Plateau extends JFrame {
             currentColumn++;
         }
     }
+
+    public void initialisePieces(){
+        initialiseNuages();
+        
+        for (int index = 0; index < totalCases; index++){
+            if (((index >= 18 && index <= 33) || (index >= 52 && index <= 85)) && (index % 2 == 0)){
+                cases[index].addPiece(new Glace(Color.RED));
+            }
+            if (((index >= 222 && index <= 254) || (index >= 272 && index <= 288)) && (index % 2 != 0)){
+                cases[index].addPiece(new Glace(Color.GREEN));
+            }
+            if ((index >= 35 && index <= 51) && (index % 2 != 0)){
+                cases[index].addPiece(new VehiculeEau(Color.RED));
+
+            }
+        }
+        
+    }
+
+    public void initialiseNuages(){
+        List<Integer> pos = generateUniqueRandomNumbers(30, 86, 220);
+        int i = 0; 
+        for (int number : pos) {
+            if (i <= 15){cases[number].addPiece(new NuageEau());}
+            else{cases[number].addPiece(new NuageMet());}
+            i++;    
+        }
+    }
+
+    private List<Integer> generateUniqueRandomNumbers(int count, int min, int max) {
+        List<Integer> numbers = new ArrayList<>();
+        Random random = new Random();
+        
+        while (numbers.size() < count) {
+            int randomNumber = random.nextInt(max - min + 1) + min;
+            if (!numbers.contains(randomNumber)) {
+                numbers.add(randomNumber);
+            }
+        }
+        return numbers;
+    }
+
+
 
     public Case[] getCases(){
         return cases;

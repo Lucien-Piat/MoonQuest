@@ -1,10 +1,13 @@
 package objets.pieces;
 
+import java.awt.Color;
+
 import objets.pieces.abstract_class.Piece;
 
 public class Glace extends Piece {
 
-    public Glace(){
-        super("G"); 
+    public Glace(Color player){
+        super("G");
+        this.player = player ; 
     }
 }
