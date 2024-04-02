@@ -32,7 +32,6 @@ public class Plateau extends JFrame {
         cases = new Case[totalCases]; // Initialise les cases du plateau
         initialiseCase();
         initialisePieces();
-        
     }
 
     private void initialiseCase(){
@@ -143,6 +142,10 @@ public class Plateau extends JFrame {
 
     public Case[] getCases(){
         return cases;
+    }
+
+    public int getBoardSize(){
+        return boardSize; 
     }
         
     /**
