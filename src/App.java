@@ -4,7 +4,7 @@ import objets.*;
 public class App {
     public static void main(String[] args) throws Exception {
         Plateau board = new Plateau();
-        System.out.println(board.getCases()[273].getName());
+        System.out.println(board.getCases()[17].getName());
         board.display();
 
     }

@@ -2,7 +2,6 @@ package objets.plateau;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -88,7 +87,7 @@ public class Plateau extends JFrame {
 
     public void initialisePieces(){
         initialiseNuages();
-        
+        Piece vehicleToAdd = new VehiculeEau(Color.BLACK);
         for (int index = 0; index < totalCases; index++){
             if (((index >= 18 && index <= 33) || (index >= 52 && index <= 85)) && (index % 2 == 0)){
                 cases[index].addPiece(new Glace(Color.RED));
@@ -96,12 +95,26 @@ public class Plateau extends JFrame {
             if (((index >= 222 && index <= 254) || (index >= 272 && index <= 288)) && (index % 2 != 0)){
                 cases[index].addPiece(new Glace(Color.GREEN));
             }
-            if ((index >= 35 && index <= 51) && (index % 2 != 0)){
-                cases[index].addPiece(new VehiculeEau(Color.RED));
-
+            if ((index >= 35 && index <= 51) && (index % 2 == 0)) {
+                if (vehicleToAdd instanceof VehiculeEau){
+                    cases[index].addPiece(new VehiculeEau(Color.RED));
+                    vehicleToAdd = new VehiculeMet(Color.BLACK);
+                }else{
+                    cases[index].addPiece(new VehiculeMet(Color.RED));
+                    vehicleToAdd = new VehiculeEau(Color.BLACK);  
+                }
             }
-        }
-        
+            if (index == 100){vehicleToAdd = new VehiculeMet(Color.BLACK);}
+            if ((index >= 256 && index <= 271) && (index % 2 != 0)) {
+                if (vehicleToAdd instanceof VehiculeEau){
+                    cases[index].addPiece(new VehiculeEau(Color.GREEN));
+                    vehicleToAdd = new VehiculeMet(Color.BLACK);
+                }else{
+                    cases[index].addPiece(new VehiculeMet(Color.GREEN));
+                    vehicleToAdd = new VehiculeEau(Color.BLACK);  
+                }
+            }
+        }  
     }
 
     public void initialiseNuages(){
@@ -117,23 +130,21 @@ public class Plateau extends JFrame {
     private List<Integer> generateUniqueRandomNumbers(int count, int min, int max) {
         List<Integer> numbers = new ArrayList<>();
         Random random = new Random();
-        
+      
         while (numbers.size() < count) {
-            int randomNumber = random.nextInt(max - min + 1) + min;
-            if (!numbers.contains(randomNumber)) {
-                numbers.add(randomNumber);
-            }
+          int randomNumber;
+          do {
+            randomNumber = random.nextInt(max - min + 1) + min;
+          } while (randomNumber % 17 == 0 || numbers.contains(randomNumber));
+          numbers.add(randomNumber);
         }
         return numbers;
-    }
-
-
+      }
 
     public Case[] getCases(){
         return cases;
     }
         
-
     /**
      * Affiche le plateau de jeu.
      */
@@ -149,7 +160,7 @@ public class Plateau extends JFrame {
             cases[index].set();
             contentPane.add(cases[index]);
         }
-        super.setSize(700,700);
+        super.setSize(800,800);
         super.setLocationRelativeTo(null);
         super.setVisible(true);
     }
