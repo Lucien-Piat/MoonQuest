@@ -23,6 +23,7 @@ public class Case extends JLabel {
   private String displayCase; 
   private Vector<Piece> contenu;  
   private boolean side;
+  private int indice; 
   private Color fontColor = Color.BLACK;
 
   /**
@@ -30,13 +31,14 @@ public class Case extends JLabel {
    * @param color La couleur de la case.
    * @param name Le nom de la case.
    */
-  public Case(Color color, String name) {
+  public Case(Color color, String name, int indice) {
       super(); 
       this.bgCase = color;
       this.nameCase = name;   
       this.displayCase = " ";
       this.contenu = new Vector<>();
       this.side = false;
+      this.indice = indice; 
   }
 
   public void setSide(){
@@ -53,6 +55,11 @@ public class Case extends JLabel {
   public Vector<Piece> getContenu(){
       return this.contenu;
   }
+
+  public int getIndice(){
+    return this.indice;
+}
+
 
   public String extractContent(){
       StringBuilder contentString = new StringBuilder();
@@ -156,12 +163,36 @@ public class Case extends JLabel {
       }
   }
 
-  public  String findDestinationCase(String direction, int boardSize, int distance){
+  public String moveOneCaseAllDirections(String direction, int boardSize){
     String destination = this.nameCase;
-      if (direction.equals("nord")){
-        destination = moveOneCase("up", boardSize, destination);
-        if (distance == 2 ){destination = moveOneCase("up", boardSize, destination);}
-      }
+    if (direction.equals("nord")){
+      destination = moveOneCase("up", boardSize, destination);
+    }
+    if (direction.equals("nord_est")){
+      destination = moveOneCase("right", boardSize, destination);
+      destination = moveOneCase("up", boardSize, destination);
+    }
+    if (direction.equals("est")){
+      destination = moveOneCase("right", boardSize, destination);
+    }
+    if (direction.equals("sud_est")){
+      destination = moveOneCase("right", boardSize, destination);
+      destination = moveOneCase("down", boardSize, destination);
+    }
+    if (direction.equals("sud")){
+      destination = moveOneCase("down", boardSize, destination);
+    }
+    if (direction.equals("sud_ouest")){
+      destination = moveOneCase("left", boardSize, destination);
+      destination = moveOneCase("down", boardSize, destination);
+    }
+    if (direction.equals("ouest")){
+      destination = moveOneCase("left", boardSize, destination);
+    }
+    if (direction.equals("nord_ouest")){
+      destination = moveOneCase("left", boardSize, destination);
+      destination = moveOneCase("up", boardSize, destination);
+    } 
     return destination; 
   }
 }
