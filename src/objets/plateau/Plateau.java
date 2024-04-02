@@ -59,23 +59,23 @@ public class Plateau extends JFrame {
             // Créer des cases en fonction de la position actuelle
             if (index == 0) {
                 // Si c'est la case de coin
-                cases[index] = new Case(new Color(50, 50, 50), "Coin");
+                cases[index] = new Case(new Color(50, 50, 50), "Coin", index);
             } else if (currentRow == 0) {
                 // Si c'est la premiere ligne
-                cases[index] = new Case(new Color(180, 169, 169), String.valueOf(lettreList.get(currentColumn - 1)));
+                cases[index] = new Case(new Color(180, 169, 169), String.valueOf(lettreList.get(currentColumn - 1)),index);
                 cases[index].setNameAsDisplay();
                 cases[index].setSide();
             } else if (currentColumn == 0) {
                 // Si c'est la premiere colonne
-                cases[index] = new Case(new Color(180, 169, 169), String.valueOf(currentRow));
+                cases[index] = new Case(new Color(180, 169, 169), String.valueOf(currentRow),index);
                 cases[index].setNameAsDisplay();
                 cases[index].setSide();
             } else {
                 // Si la case est dans le plateau (on alterne les couleurs)
                 if (colorToChoose) {
-                    cases[index] = new Case(new Color(222, 184, 135), String.valueOf(lettreList.get(currentColumn - 1))+String.valueOf(currentRow));
+                    cases[index] = new Case(new Color(222, 184, 135), String.valueOf(lettreList.get(currentColumn - 1))+String.valueOf(currentRow),index);
                 } else {
-                    cases[index] = new Case(new Color(139, 69, 19), String.valueOf(lettreList.get(currentColumn - 1))+String.valueOf(currentRow));
+                    cases[index] = new Case(new Color(139, 69, 19), String.valueOf(lettreList.get(currentColumn - 1))+String.valueOf(currentRow),index);
 
                 }
                 colorToChoose = !colorToChoose; // Basculer la couleur pour la case suivante
@@ -188,5 +188,40 @@ public class Plateau extends JFrame {
                 return; 
             }
         }
-    }    
+    } 
+
+    public Case findCaseWithName(String name){
+        for (Case currCase : cases){
+            if (currCase.getName().equals(name)){return currCase;}
+        }
+        return cases[0]; 
+    }
+
+    public Boolean checkForGlace(Case toCheck){
+        if (toCheck.getContenu().get(0).getToPrint().equals("G")){
+            return false;
+        }else{return true;}
+    }
+
+    public void deplacePiece(Case origineCase, String direction, int distance, Piece currentPiece){
+        Case destination = origineCase;
+        destination = findCaseWithName(origineCase.moveOneCaseAllDirections(direction, boardSize)); 
+        if (checkForGlace(destination)){
+            if (distance == 2){
+                destination = findCaseWithName(destination.moveOneCaseAllDirections(direction, boardSize));
+                if (checkForGlace(destination)){
+                    // déplacement
+                }else{
+                    System.out.println("Glace présente, déplacement non autorisé");
+                    return;
+                }
+            }else{
+                /*déplacement*/
+            }
+        
+        }
+        System.out.println("Glace présente, déplacement non autorisé");
+        return; 
+        
+    }
 }
