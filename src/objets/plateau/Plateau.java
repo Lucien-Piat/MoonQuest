@@ -211,6 +211,9 @@ public class Plateau extends JFrame {
                 destination = findCaseWithName(destination.moveOneCaseAllDirections(direction, boardSize));
                 if (checkForGlace(destination)){
                     // déplacement
+                    addItemToCase(destination.getName(),currentPiece);
+                    removeItemFromCase(direction, direction);
+                    // To do
                 }else{
                     System.out.println("Glace présente, déplacement non autorisé");
                     return;
