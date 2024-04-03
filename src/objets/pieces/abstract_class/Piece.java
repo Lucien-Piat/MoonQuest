@@ -6,6 +6,7 @@ public abstract class Piece {
 
     protected String toPrint; 
     protected Color player = Color.BLACK;
+    final String[] directions = {"nord", "nord_est", "est", "sud_est", "sud", "sud_ouest", "ouest", "nord_ouest"};
 
     public Piece(String toPrint){
         this.toPrint = toPrint;
@@ -17,6 +18,10 @@ public abstract class Piece {
     }
     public Color getPlayer(){
         return this.player;
+    }
+
+    public String move(){
+        return "bouge_pas";
     }
     
 }

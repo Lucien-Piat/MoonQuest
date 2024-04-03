@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Nuage extends Piece {
 
-    final String[] directions = {"nord", "nord_est", "est", "sud_est", "sud", "sud_ouest", "ouest", "nord_ouest"};
+    
 
     public Nuage(String toPrint){
         super(toPrint); 
