@@ -4,10 +4,19 @@ import java.util.Random;
 
 public class Nuage extends Piece {
 
-    
+    private Boolean hasPlayed;
 
-    public Nuage(String toPrint){
-        super(toPrint); 
+    public Nuage(String toPrint, String caseDepart){
+        super(toPrint, caseDepart); 
+        this.hasPlayed=false;   
+    }
+
+    public Boolean getHasPlayed(){
+        return this.hasPlayed;
+    }
+
+    public void switchHasPlay(){
+        this.hasPlayed = !hasPlayed; 
     }
 
     public String move(){

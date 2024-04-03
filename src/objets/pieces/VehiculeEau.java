@@ -6,8 +6,8 @@ import objets.pieces.abstract_class.Vehicule;
 
 public class VehiculeEau extends Vehicule {
 
-    public VehiculeEau(Color player){
-        super("Vo"); 
+    public VehiculeEau(Color player, String caseDepart){
+        super("Vo", caseDepart); 
         this.player = player;
     }
 }
