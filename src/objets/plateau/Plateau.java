@@ -84,7 +84,7 @@ public class Plateau extends JFrame {
         }
     }
 
-    public void initialisePieces(){
+    private void initialisePieces(){
         initialiseNuages();
         Piece vehicleToAdd = new VehiculeEau(Color.BLACK);
         for (int index = 0; index < totalCases; index++){
@@ -116,7 +116,7 @@ public class Plateau extends JFrame {
         }  
     }
 
-    public void initialiseNuages(){
+    private void initialiseNuages(){
         List<Integer> pos = generateUniqueRandomNumbers(30, 86, 220);
         int i = 0; 
         for (int number : pos) {
@@ -168,39 +168,28 @@ public class Plateau extends JFrame {
         super.setVisible(true);
     }
 
-    public void addItemToCase(String caseName,Piece piece){
-        for (int i = 0; i < cases.length; i++) {
-            if (cases[i].getName().equals(caseName)) {
-                cases[i].addPiece(piece);
-                return; 
-            }
-        }
-    }
-
-    public void removeItemFromCase(String caseName,String objectName){
-        for (int i = 0; i < cases.length; i++) {
-            if (cases[i].getName().equals(caseName)) {
-                for (Piece piece : cases[i].getContenu()){
-                    if (piece.getToPrint() == objectName){
-                        cases[i].getContenu().remove(piece);
-                    }
-                }
-                return; 
-            }
-        }
-    } 
-
-    public Case findCaseWithName(String name){
+    private Case findCaseWithName(String name){
         for (Case currCase : cases){
             if (currCase.getName().equals(name)){return currCase;}
         }
         return cases[0]; 
     }
 
-    public Boolean checkForGlace(Case toCheck){
-        if (toCheck.getContenu().get(0).getToPrint().equals("G")){
-            return false;
-        }else{return true;}
+    private void addItemToCase(Case curr_case ,Piece piece){
+        curr_case.addPiece(piece);
+    }
+
+    private void removeItemFromCase(Case curr_case, Piece piece){
+        curr_case.getContenu().remove(piece);
+    } 
+
+    private Boolean checkForGlace(Case toCheck){
+        for (Piece piece : toCheck.getContenu()){
+            if (piece.getToPrint().equals("G")){
+                return false;
+            }
+        }
+        return true;
     }
 
     public void deplacePiece(Case origineCase, String direction, int distance, Piece currentPiece){
@@ -210,21 +199,18 @@ public class Plateau extends JFrame {
             if (distance == 2){
                 destination = findCaseWithName(destination.moveOneCaseAllDirections(direction, boardSize));
                 if (checkForGlace(destination)){
-                    // déplacement
-                    addItemToCase(destination.getName(),currentPiece);
-                    removeItemFromCase(direction, direction);
-                    // To do
+                    addItemToCase(destination ,currentPiece);
+                    removeItemFromCase(origineCase, currentPiece);
                 }else{
                     System.out.println("Glace présente, déplacement non autorisé");
                     return;
                 }
             }else{
-                /*déplacement*/
+                addItemToCase(destination ,currentPiece);
+                removeItemFromCase(origineCase, currentPiece);
             }
-        
         }
         System.out.println("Glace présente, déplacement non autorisé");
         return; 
-        
     }
 }
