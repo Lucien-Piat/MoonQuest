@@ -1,12 +1,11 @@
-import objets.plateau.Plateau;
-import objets.players.NonJoueur;
-import objets.*;
+import objets.plateau.PlateauGraphique;
+import objets.plateau.PlateauLogique;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        Plateau board = new Plateau();
-        board.display();
-        NonJoueur.joue(board);
+        PlateauGraphique board = new PlateauGraphique();
+        PlateauLogique plateau_logique = new PlateauLogique(board);
+        plateau_logique.PrintAllCases();
 
     }
 }
