@@ -16,18 +16,21 @@ import objets.pieces.abstract_class.Piece;
 
 public class PlateauLogique {
 
-    private Vector<Piece> Pieces; 
+    private Vector<Piece> Pieces;
+    private int boardSize ;
 
     public PlateauLogique(PlateauGraphique plateauGraphique){
         this.Pieces = new Vector<>();
         initialisePieces(plateauGraphique);
+        boardSize = plateauGraphique.getBoardSize();
+
     }
 
-    public void PrintAllCases(){
-        for (Piece piece : Pieces){
-            System.out.println(piece.getCurrCase());
-        }
+    public Vector<Piece> getPieces(){
+      return Pieces; 
     }
+
+
 
     private List<Integer> generateUniqueRandomNumbers(int count, int min, int max) {
         List<Integer> numbers = new ArrayList<>();
@@ -99,7 +102,7 @@ public class PlateauLogique {
         return true;
     }
 
-    private String findRightChar(String currentChar, int boardSize, int way) {
+    private String findRightChar(String currentChar, int way) {
         String[] alphabetArray = new String[boardSize - 1];
         String[] numArray = new String[boardSize - 1];
         char startChar = 'A';
@@ -128,18 +131,18 @@ public class PlateauLogique {
         return Character.isLetter(currentChar.charAt(0)) ? alphabetArray[newIndex] : numArray[newIndex];
     }
       
-    private String moveOneCase(String direction, int boardSize, String caseOrigineNom) {
+    private String moveOneCase(String direction, String caseOrigineNom) {
         String letterChar = caseOrigineNom.substring(0, 1);
         String numChar = caseOrigineNom.substring(1);
         switch (direction) {
           case "up":
-            return letterChar + findRightChar(numChar, boardSize, -1);
+            return letterChar + findRightChar(numChar, -1);
           case "down":
-            return letterChar + findRightChar(numChar, boardSize, 1);
+            return letterChar + findRightChar(numChar, 1);
           case "left":
-            return findRightChar(letterChar, boardSize, -1) + numChar;
+            return findRightChar(letterChar, -1) + numChar;
           case "right":
-            return findRightChar(letterChar, boardSize, 1) + numChar;
+            return findRightChar(letterChar, 1) + numChar;
           default:
             return "";
         }
@@ -148,38 +151,38 @@ public class PlateauLogique {
     public String moveOneCaseAllDirections(String caseOrigineName, String direction, int boardSize){
       String destination = caseOrigineName;
       if (direction.equals("nord")){
-        destination = moveOneCase("up", boardSize, destination);
+        destination = moveOneCase("up",  destination);
       }
       if (direction.equals("nord_est")){
-        destination = moveOneCase("right", boardSize, destination);
-        destination = moveOneCase("up", boardSize, destination);
+        destination = moveOneCase("right", destination);
+        destination = moveOneCase("up", destination);
       }
       if (direction.equals("est")){
-        destination = moveOneCase("right", boardSize, destination);
+        destination = moveOneCase("right", destination);
       }
       if (direction.equals("sud_est")){
-        destination = moveOneCase("right", boardSize, destination);
-        destination = moveOneCase("down", boardSize, destination);
+        destination = moveOneCase("right", destination);
+        destination = moveOneCase("down", destination);
       }
       if (direction.equals("sud")){
-        destination = moveOneCase("down", boardSize, destination);
+        destination = moveOneCase("down", destination);
       }
       if (direction.equals("sud_ouest")){
-        destination = moveOneCase("left", boardSize, destination);
-        destination = moveOneCase("down", boardSize, destination);
+        destination = moveOneCase("left", destination);
+        destination = moveOneCase("down", destination);
       }
       if (direction.equals("ouest")){
-        destination = moveOneCase("left", boardSize, destination);
+        destination = moveOneCase("left", destination);
       }
       if (direction.equals("nord_ouest")){
-        destination = moveOneCase("left", boardSize, destination);
-        destination = moveOneCase("up", boardSize, destination);
+        destination = moveOneCase("left", destination);
+        destination = moveOneCase("up", destination);
       } 
       return destination; 
     }
     
 
-    public void deplacePiece(String caseOrigine, String direction, int distance, Piece pieceToMove, int boardSize){
+    public void deplacePiece(String caseOrigine, String direction, int distance, Piece pieceToMove){
         String destination = caseOrigine;
 
         destination = moveOneCaseAllDirections(caseOrigine ,direction, boardSize); 
