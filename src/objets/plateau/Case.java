@@ -31,7 +31,7 @@ public class Case extends JLabel {
       super(); 
       this.bgCase = color;
       this.nameCase = name;   
-      this.displayCase = " ";
+      this.displayCase = "";
       this.side = false;
   }
 
@@ -44,23 +44,31 @@ public class Case extends JLabel {
     return this.side;
   }
 
-  public String extractContent(Vector<Piece> CaseContent){
-    StringBuilder contentString = new StringBuilder();
-
-    for (int i = 0; i < CaseContent.size(); i++){
-        contentString.append(CaseContent.get(i).getToPrint());
-        if (i != CaseContent.size()){ contentString.append(" ");}
-    }
-    if (CaseContent.size() > 1 ){
-        this.font = new Font("Arial", Font.PLAIN, fontSize/CaseContent.size()+5);
-    }
-    return contentString.toString(); 
-}
-
-  public void updateDisplay(Vector<Piece> CaseContent) {
-      this.displayCase = extractContent(CaseContent);
-      if (CaseContent.size() > 0){this.fontColor = CaseContent.get(0).getPlayer();} 
+  public void clearDisplay(){
+    if (!this.side){this.displayCase="";}
   }
+
+
+
+  public void updateDisplay(Piece pieceToAdd) {
+      addStringToDisplay(pieceToAdd.getToPrint());
+      if (displayCase.length()>2){
+        this.fontColor = Color.BLACK; 
+        this.font = new Font("Arial", Font.PLAIN, fontSize/displayCase.length()+7);
+      }else{ 
+      this.fontColor = pieceToAdd.getPlayer();
+        }
+    } 
+  
+    public void addStringToDisplay(String toAdd){
+        StringBuilder contentString = new StringBuilder();
+        contentString.append(this.displayCase);
+        if (!this.displayCase.equals("")){
+            contentString.append(" ");
+        }
+        contentString.append(toAdd);
+        this.displayCase = contentString.toString(); 
+    }
 
   public String getName() {
       return this.nameCase; 
@@ -78,6 +86,4 @@ public class Case extends JLabel {
       setFont(font);
       setForeground(fontColor);
   }
-
-  
 }

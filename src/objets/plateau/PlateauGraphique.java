@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.swing.JFrame;
 
+import objets.pieces.abstract_class.Piece;
+
 /**
  * Représente le plateau de jeu.
  */
@@ -105,4 +107,23 @@ public class PlateauGraphique extends JFrame {
         super.setLocationRelativeTo(null);
         super.setVisible(true);
     }
+
+    public Case findCaseWithName(String name){
+        for (Case currCase : cases){
+            if (currCase.getName().equals(name)){return currCase;}
+        }
+        return cases[0]; 
+    }
+
+
+    public void updateDisplay(PlateauLogique plateau){
+        for (Case currCase : cases){
+            currCase.clearDisplay();
+        }
+        for (Piece piece : plateau.getPieces()){
+            findCaseWithName(piece.getCurrCase()).updateDisplay(piece);
+        }
+    }
+
+
 }
