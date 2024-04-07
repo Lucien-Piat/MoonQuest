@@ -64,7 +64,7 @@ public class PlateauLogique {
         initialiseNuages(plateauGraphique);
         Piece vehicleToAdd = new VehiculeEau(Color.BLACK,"none");
         for (int index = 0; index < plateauGraphique.getTotalCase() ; index++){
-            if (((index >= 18 && index <= 33) || (index >= 52 && index <= 85)) && (index % 2 == 0)){
+            if (((index >= 18 && index <= 33) || (index >= 52 && index <= 85)) && (index % 2 == 0) && (index!= 68)){
                 Pieces.add(new Glace(Color.RED, plateauGraphique.getCases()[index].getName()));
             }
             if (((index >= 222 && index <= 254) || (index >= 272 && index <= 288)) && (index % 2 != 0)){
@@ -182,24 +182,24 @@ public class PlateauLogique {
     }
     
 
-    public void deplacePiece(String caseOrigine, String direction, int distance, Piece pieceToMove){
+    public void deplacePiece(String caseOrigine, String direction, int distance, Piece pieceToMove, Boolean isGlace){
         String destination = caseOrigine;
-
         destination = moveOneCaseAllDirections(caseOrigine ,direction, boardSize); 
-        if (checkForGlace(destination)){
+        if (checkForGlace(destination)|| isGlace){
             if (distance == 2){
                 destination = moveOneCaseAllDirections(destination, direction, boardSize);
-                if (checkForGlace(destination)){
+                if (checkForGlace(destination) || isGlace){
                     pieceToMove.setNewCase(destination);
+                    return;
                 }else{
-                    System.out.println("Glace présente, déplacement non autorisé");
+                    System.out.println("Glace présente, déplacement non autorisé 1");
                     return;
                 }
             }else{
                 pieceToMove.setNewCase(destination);
+                return;
             }
         }
-        System.out.println("Glace présente, déplacement non autorisé");
-        return; 
+        System.out.println("Glace présente, déplacement non 1");   
     }
 }
