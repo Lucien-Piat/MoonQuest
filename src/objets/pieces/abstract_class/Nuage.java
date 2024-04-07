@@ -19,6 +19,7 @@ public class Nuage extends Piece {
         this.hasPlayed = !hasPlayed; 
     }
 
+    @Override
     public String move(){
         Random random = new Random();
         if (random.nextInt(5) == 0) { // 0 to 4 (inclusive)
