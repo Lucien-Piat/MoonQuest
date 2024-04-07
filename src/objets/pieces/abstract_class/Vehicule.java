@@ -1,5 +1,4 @@
 package objets.pieces.abstract_class;
-import javax.swing.*;
 
 public abstract class Vehicule extends Piece {
 
@@ -20,39 +19,23 @@ public abstract class Vehicule extends Piece {
         return this.captures; 
     }
 
-    public static String askDirection(int distance) {
-        JTextField directionField = new JTextField(10);
-        String text = "nord, est, sud, ouest";
-        if (distance == 2){text = "nord, nord_est, est, sud_est...";}
-        JLabel directionLabel = new JLabel(text);
-        JPanel panel = new JPanel();
-        panel.add(directionLabel);
-        panel.add(directionField);
-        int result = JOptionPane.showConfirmDialog(null, panel, "Choisisez une direction", JOptionPane.OK_CANCEL_OPTION);
-        String direction = null;
-        if (result == JOptionPane.OK_OPTION) {
-          direction = directionField.getText().trim();
+    @Override
+    public boolean isAcitive(){
+        if (this.captures>0){
+            return true;
         }
-        return direction;
+        return false; 
     }
 
-    private String passDirectionifValid(String potentialDirection, int distance){
-        for (int i = 0, i++){
-            TO DO CHECK IF STRING IN AT START OR END OF DIRECTION 
-        }
-    }
-
+    @Override
     public String move(){
+        int distance = 1;
+        if (isAcitive()){distance=2;}
         while (true) {
-            if (this.captures>0){
-                askDirection(2);
-                
-            }else{
-                askDirection(1);}
+            String directionChoisie = askDirection(distance);
+            if (!passDirectionifValid(directionChoisie, distance).equals("invalid")){
+                return directionChoisie; 
+            }
         }
-
-        
     }
-
-
 }
