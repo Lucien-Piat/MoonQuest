@@ -5,8 +5,6 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-import java.util.Vector;
-
 import objets.pieces.abstract_class.Piece;
 
 /**
@@ -14,7 +12,7 @@ import objets.pieces.abstract_class.Piece;
  */
 public class Case extends JLabel {
 
-  final int fontSize = 22;
+  private int fontSize = 22;
   private Font font = new Font("Arial", Font.PLAIN, fontSize);
   private Color bgCase; 
   private String nameCase;
@@ -45,10 +43,10 @@ public class Case extends JLabel {
   }
 
   public void clearDisplay(){
-    if (!this.side){this.displayCase="";}
+    if (!this.side){
+      this.displayCase="";
+      this.font = new Font("Arial", Font.PLAIN, fontSize);}
   }
-
-
 
   public void updateDisplay(Piece pieceToAdd) {
       addStringToDisplay(pieceToAdd.getToPrint());
