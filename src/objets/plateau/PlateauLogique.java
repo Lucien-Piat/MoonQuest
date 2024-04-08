@@ -187,10 +187,10 @@ public class PlateauLogique {
     public String deplacePiece(String caseOrigine, String direction, int distance, Piece pieceToMove, Boolean isGlace){
         String destination = caseOrigine;
         destination = moveOneCaseAllDirections(caseOrigine ,direction, boardSize); 
-        if (checkForGlace(destination)|| isGlace){
+        if (checkForGlace(destination)|| isGlace || (distance==1)){
             if (distance == 2){
                 destination = moveOneCaseAllDirections(destination, direction, boardSize);
-                if (checkForGlace(destination) || isGlace){
+                if (checkForGlace(destination)|| isGlace || (distance==1)){
                     pieceToMove.setNewCase(destination);
                     return destination; 
                 }else{
@@ -216,7 +216,7 @@ public class PlateauLogique {
   public Vector<Piece> selectPiecesToDestroy(Piece pieceArrivante, String caseDestination){
     // Si un nuage arrive 
     Vector<Piece> toDestroy = new Vector<>(); 
-    if (pieceArrivante.getToPrint().substring(0, 1).equals("N")){
+    if (pieceArrivante instanceof Nuage){
       for (Piece piece : Pieces){
         if((piece.getCurrCase().equals(caseDestination)) && (!piece.equals(pieceArrivante))){
           if(piece instanceof Vehicule){
@@ -226,6 +226,24 @@ public class PlateauLogique {
         }
       }
     }
+
+    // Si une glace arrive
+    if (pieceArrivante instanceof Glace){
+      for (Piece piece : Pieces){
+        if((piece.getCurrCase().equals(caseDestination)) && (!piece.equals(pieceArrivante)) && (!piece.getPlayer().equals(pieceArrivante.getPlayer()))){
+          toDestroy.add(piece);
+          System.out.println("Console : Destruction en "+caseDestination);
+        }
+      }
+    }
+
+
+
+    // Si un vehicule arrive
+      // Sur un nuage de son type
+      // Sur un autre chose
+
+    
     return toDestroy;
   }
   
