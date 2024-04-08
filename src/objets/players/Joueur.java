@@ -23,7 +23,7 @@ public abstract class Joueur {
         return direction;
     }
 
-    public void joue(PlateauLogique board){
-
+    public String joue(PlateauLogique board){
+        return "";
     }
 }

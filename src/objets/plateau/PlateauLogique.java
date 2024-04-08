@@ -13,6 +13,7 @@ import objets.pieces.NuageMet;
 import objets.pieces.VehiculeEau;
 import objets.pieces.VehiculeMet;
 import objets.pieces.abstract_class.Piece;
+import objets.pieces.abstract_class.Vehicule;
 
 public class PlateauLogique {
 
@@ -182,7 +183,7 @@ public class PlateauLogique {
     }
     
 
-    public void deplacePiece(String caseOrigine, String direction, int distance, Piece pieceToMove, Boolean isGlace){
+    public String deplacePiece(String caseOrigine, String direction, int distance, Piece pieceToMove, Boolean isGlace){
         String destination = caseOrigine;
         destination = moveOneCaseAllDirections(caseOrigine ,direction, boardSize); 
         if (checkForGlace(destination)|| isGlace){
@@ -190,16 +191,47 @@ public class PlateauLogique {
                 destination = moveOneCaseAllDirections(destination, direction, boardSize);
                 if (checkForGlace(destination) || isGlace){
                     pieceToMove.setNewCase(destination);
-                    return;
+                    return destination; 
                 }else{
                     System.out.println("Glace présente, déplacement non autorisé 1");
-                    return;
+                    return ""; 
                 }
             }else{
                 pieceToMove.setNewCase(destination);
-                return;
+                return destination; 
             }
         }
         System.out.println("Glace présente, déplacement non 1");   
+        return ""; 
     }
+
+
+
+
+  public Vector<Piece> selectPiecesToDestroy(Piece pieceArrivante, String caseDestination){
+    // Si un nuage arrive 
+    Vector<Piece> toDestroy = new Vector<>(); 
+    if (pieceArrivante.getToPrint().substring(0, 1).equals("N")){
+      for (Piece piece : Pieces){
+        if((piece.getCurrCase().equals(caseDestination)) && (!piece.equals(pieceArrivante))){
+          if(piece instanceof Vehicule){
+            toDestroy.add(piece);
+            System.out.println("DESTRUCTION");
+          }
+        }
+      }
+    }
+    return toDestroy;
+  }
+  
+  public String applyRules(Vector<Piece> toDestroy){
+    for (Piece pieceToDestroy : toDestroy){
+      Pieces.remove(pieceToDestroy); 
+    }
+    if (toDestroy.size() > 0){return " x ";}return " . ";
+  }
+
+  public String spitOutLog(String caseOrigine, String caseDestination, String applyRulesLog){
+    return caseOrigine + " - " + caseDestination + applyRulesLog;
+  }
 }

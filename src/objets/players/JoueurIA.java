@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Vector;
 
 import objets.pieces.abstract_class.Piece;
 import objets.plateau.PlateauLogique;
@@ -40,14 +41,18 @@ public class JoueurIA extends Joueur {
     }
 
 
-    public void joue(PlateauLogique board){
-        waitForConfirmation("C'est le tour du joueur IA " + numeroJoueur);
-        Piece randomPiece = selectRandomPiece(board); 
-        int distance = 1;
-        if (randomPiece.isAcitive()){distance=2;}
-        board.deplacePiece(randomPiece.getCurrCase(),selectRandomDirection(distance),distance,randomPiece,randomPiece.isGlace());
-                    return;
-    }
+  public String joue(PlateauLogique board){
+    String log = "";
+    //waitForConfirmation("C'est le tour du joueur IA " + numeroJoueur);
+    Piece randomPiece = selectRandomPiece(board); 
+    int distance = 1;
+    if (randomPiece.isAcitive()){distance=2;}
+    String caseOrigine = randomPiece.getCurrCase();
+    String caseDestination = board.deplacePiece(caseOrigine, selectRandomDirection(distance),distance,randomPiece,randomPiece.isGlace());
+    log = board.applyRules(board.selectPiecesToDestroy(randomPiece, caseDestination));
+    log = board.spitOutLog(caseOrigine, caseDestination, log); 
+    return log; 
+  }
 }
 
    
