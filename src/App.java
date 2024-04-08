@@ -20,7 +20,7 @@ public class App {
 
         if ((player1 instanceof JoueurIA) && (player2 instanceof JoueurIA)){
             try {
-                Thread.sleep(100); 
+                Thread.sleep(0); 
               } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -87,7 +87,7 @@ public class App {
         while (!logs.checkIfGameIsOver()){
             tour(player1, player2, nuage,  plateau_graphique, plateau_logique, logs); 
         }
-        
+
         logs.printLogInConsole();
         finDePartie(); 
     }

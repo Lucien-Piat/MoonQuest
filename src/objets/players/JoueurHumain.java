@@ -34,6 +34,16 @@ public class JoueurHumain extends Joueur {
     }
 
 
+    private int selectDistance() {
+        String[] options = {"Terrestre", "Aérien"};
+        int choice = JOptionPane.showOptionDialog(null, "Votre véhicule est activé, choisisez le déplacement :", "Choix du déplacement", JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+        if (choice == 1) {
+            return 2;
+        } 
+        return 1;   
+    }
+
     public String joue(PlateauLogique board){
         String log, caseDestination = "";
         
@@ -50,11 +60,12 @@ public class JoueurHumain extends Joueur {
         for (Piece currPiece : board.getPieces()){
             if ((currPiece.getCurrCase().equals(caseOrigine)) &&  currPiece.getPlayer().equals(this.team)){
                 int distance = 1;
-                if (currPiece.isAcitive()){distance=2;}
+                if (currPiece.isAcitive()){distance=selectDistance();}
                 caseDestination = board.deplacePiece(caseOrigine,currPiece.move(),distance,currPiece,currPiece.isGlace());
                 toDestroy = board.selectPiecesToDestroy(currPiece, caseDestination);
             }
         }
+        
         log = board.applyRules(toDestroy);
         log = board.spitOutLog(caseOrigine, caseDestination, log); 
         return log; 
