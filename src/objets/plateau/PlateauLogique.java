@@ -12,6 +12,7 @@ import objets.pieces.NuageEau;
 import objets.pieces.NuageMet;
 import objets.pieces.VehiculeEau;
 import objets.pieces.VehiculeMet;
+import objets.pieces.abstract_class.Nuage;
 import objets.pieces.abstract_class.Piece;
 import objets.pieces.abstract_class.Vehicule;
 
@@ -193,7 +194,9 @@ public class PlateauLogique {
                     pieceToMove.setNewCase(destination);
                     return destination; 
                 }else{
-                    System.out.println("Glace présente, déplacement non autorisé 1");
+                    if(!(pieceToMove instanceof Nuage)){
+                      System.out.println("Console : Glace présente en "+destination+" pas de mouvement");
+                    }
                     return ""; 
                 }
             }else{
@@ -201,7 +204,9 @@ public class PlateauLogique {
                 return destination; 
             }
         }
-        System.out.println("Glace présente, déplacement non 1");   
+        if(!(pieceToMove instanceof Nuage)){
+          System.out.println("Console : Glace présente en "+destination+" pas de mouvement");
+        }
         return ""; 
     }
 
@@ -216,7 +221,7 @@ public class PlateauLogique {
         if((piece.getCurrCase().equals(caseDestination)) && (!piece.equals(pieceArrivante))){
           if(piece instanceof Vehicule){
             toDestroy.add(piece);
-            System.out.println("DESTRUCTION");
+            System.out.println("Console : Destruction en "+caseDestination);
           }
         }
       }

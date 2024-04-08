@@ -1,7 +1,5 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Vector;
 
 import javax.swing.*;
@@ -20,6 +18,7 @@ public class Logger {
 
     public Logger() {
         completeLog = new Vector<>();
+        completeLog.add("LISTE DES COUPS :\n");
         turn = 1;
         scorePlayer1 = 0;
         scorePlayer2 = 0;
@@ -55,7 +54,7 @@ public class Logger {
         updateTextArea();
     }
 
-    private void updateTextArea() {
+    public void updateTextArea() {
         StringBuilder logBuilder = new StringBuilder();
         for (String entry : completeLog) {
             logBuilder.append(entry).append("\n");
@@ -64,24 +63,13 @@ public class Logger {
     }
 
     public void showLogWindow() {
-        JFrame frame = new JFrame("Game Log");
+        JFrame frame = new JFrame("Log");
         frame.getContentPane().setLayout(new BorderLayout());
         frame.getContentPane().add(new JScrollPane(logTextArea), BorderLayout.CENTER);
-
-        JButton closeButton = new JButton("Close");
-        closeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frame.dispose();
-            }
-        });
-
         JPanel buttonPanel = new JPanel();
-        buttonPanel.add(closeButton);
         frame.getContentPane().add(buttonPanel, BorderLayout.SOUTH);
-
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.pack();
+        frame.setSize(160, 500); 
         frame.setVisible(true);
     }
 

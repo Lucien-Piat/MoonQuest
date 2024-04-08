@@ -16,11 +16,11 @@ public class App {
         logs.newLogEntery(player1.joue(plateau_logique),plateau_logique);
         plateau_graphique.updateDisplay(plateau_logique);
         plateau_graphique.display();   
-        logs.showLogWindow();
+        logs.updateTextArea();
 
         if ((player1 instanceof JoueurIA) && (player2 instanceof JoueurIA)){
             try {
-                Thread.sleep(400); 
+                Thread.sleep(0); 
               } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -29,11 +29,12 @@ public class App {
         logs.newLogEntery(player2.joue(plateau_logique),plateau_logique);
         plateau_graphique.updateDisplay(plateau_logique);
         plateau_graphique.display();  
-        logs.showLogWindow();
+        logs.updateTextArea();
 
         nuage.joue(plateau_logique);
         plateau_graphique.updateDisplay(plateau_logique);
         plateau_graphique.display();   
+        logs.updateTextArea();
     }
 
 
@@ -47,9 +48,12 @@ public class App {
 
         plateau_graphique.updateDisplay(plateau_logique);
         plateau_graphique.display();
+        logs.showLogWindow();
 
         player1 = new JoueurIA(Color.GREEN, 1);
         player2 = new JoueurIA(Color.RED, 2);
+
+        Joueur.setRapide();
 
         for (int i = 0; i<100; i++){
             tour(player1, player2, nuage,  plateau_graphique, plateau_logique, logs); 
