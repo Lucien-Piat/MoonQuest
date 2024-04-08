@@ -7,9 +7,6 @@ import javax.swing.SwingConstants;
 
 import objets.pieces.abstract_class.Piece;
 
-/**
- * Représente une case sur le plateau de jeu.
- */
 public class Case extends JLabel {
 
   private int fontSize = 22;
@@ -20,11 +17,6 @@ public class Case extends JLabel {
   private boolean side;
   private Color fontColor = Color.BLACK;
 
-  /**
-   * Constructeur de la classe Case.
-   * @param color La couleur de la case.
-   * @param name Le nom de la case.
-   */
   public Case(Color color, String name, int indice) {
       super(); 
       this.bgCase = color;
@@ -45,43 +37,44 @@ public class Case extends JLabel {
   public void clearDisplay(){
     if (!this.side){
       this.displayCase="";
-      this.font = new Font("Arial", Font.PLAIN, fontSize);}
+      this.font = new Font("Arial", Font.PLAIN, fontSize);
+    }
   }
 
   public void updateDisplay(Piece pieceToAdd) {
-      addStringToDisplay(pieceToAdd.getToPrint());
-      if (displayCase.length()>2){
-        this.fontColor = Color.BLACK; 
-        this.font = new Font("Arial", Font.PLAIN, fontSize/displayCase.length()+7);
-      }else{ 
-      this.fontColor = pieceToAdd.getPlayer();
-        }
-    } 
+    addStringToDisplay(pieceToAdd.getToPrint());
+    if (displayCase.length()>2){
+      this.fontColor = Color.BLACK; 
+      this.font = new Font("Arial", Font.PLAIN, fontSize/displayCase.length()+7);
+    }else{ 
+    this.fontColor = pieceToAdd.getPlayer();
+      }
+  } 
   
     public void addStringToDisplay(String toAdd){
-        StringBuilder contentString = new StringBuilder();
-        contentString.append(this.displayCase);
-        if (!this.displayCase.equals("")){
-            contentString.append(" ");
-        }
-        contentString.append(toAdd);
-        this.displayCase = contentString.toString(); 
+      StringBuilder contentString = new StringBuilder();
+      contentString.append(this.displayCase);
+      if (!this.displayCase.equals("")){
+          contentString.append(" ");
+      }
+      contentString.append(toAdd);
+      this.displayCase = contentString.toString(); 
     }
 
   public String getName() {
-      return this.nameCase; 
+    return this.nameCase; 
   }
 
   public void setNameAsDisplay() {
-      this.displayCase = this.nameCase;
+    this.displayCase = this.nameCase;
   }
    
   public void set() {
-      setOpaque(true);
-      setBackground(bgCase); 
-      setHorizontalAlignment(SwingConstants.CENTER);
-      setText(displayCase);
-      setFont(font);
-      setForeground(fontColor);
+    setOpaque(true);
+    setBackground(bgCase); 
+    setHorizontalAlignment(SwingConstants.CENTER);
+    setText(displayCase);
+    setFont(font);
+    setForeground(fontColor);
   }
 }

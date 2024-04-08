@@ -2,16 +2,9 @@ import java.awt.Color;
 
 import objets.plateau.PlateauGraphique;
 import objets.plateau.PlateauLogique;
-import objets.players.Joueur;
-import objets.players.JoueurHumain;
-import objets.players.JoueurIA;
-import objets.players.JoueurNuage;
-
-
-
+import objets.players.*;
 
 public class App {
-
     private static void tour(Joueur player1 , Joueur player2,  JoueurNuage nuage, PlateauGraphique plateau_graphique, PlateauLogique plateau_logique, Logger logs){
         logs.newLogEntery(player1.joue(plateau_logique),plateau_logique);
         plateau_graphique.updateDisplay(plateau_logique);
@@ -36,7 +29,6 @@ public class App {
         plateau_graphique.display();   
         logs.updateTextArea();
     }
-
 
     public static void main(String[] args) throws Exception {
         PlateauGraphique plateau_graphique = new PlateauGraphique();

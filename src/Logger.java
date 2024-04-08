@@ -4,13 +4,10 @@ import java.util.Vector;
 
 import javax.swing.*;
 
-import objets.pieces.abstract_class.Nuage;
-import objets.pieces.abstract_class.Piece;
-import objets.pieces.abstract_class.Vehicule;
+import objets.pieces.abstract_class.*;
 import objets.plateau.PlateauLogique;
 
 public class Logger {
-
     private Vector<String> completeLog;
     private int turn, scorePlayer1, scorePlayer2;
     private final JTextArea logTextArea;
@@ -25,7 +22,7 @@ public class Logger {
         resteNuages = false;
 
         logTextArea = new JTextArea();
-        logTextArea.setEditable(false); // Prevent user editing the log
+        logTextArea.setEditable(false);
     }
 
     private String computeScore(PlateauLogique plateau_logique) {

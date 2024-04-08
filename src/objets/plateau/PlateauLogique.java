@@ -7,14 +7,8 @@ import java.util.Vector;
 
 import java.awt.Color;
 
-import objets.pieces.Glace;
-import objets.pieces.NuageEau;
-import objets.pieces.NuageMet;
-import objets.pieces.VehiculeEau;
-import objets.pieces.VehiculeMet;
-import objets.pieces.abstract_class.Nuage;
-import objets.pieces.abstract_class.Piece;
-import objets.pieces.abstract_class.Vehicule;
+import objets.pieces.*;
+import objets.pieces.abstract_class.*;
 
 public class PlateauLogique {
 
@@ -32,76 +26,74 @@ public class PlateauLogique {
       return Pieces; 
     }
 
-
-
     private List<Integer> generateUniqueRandomNumbers(int count, int min, int max) {
-        List<Integer> numbers = new ArrayList<>();
-        Random random = new Random();
-        while (numbers.size() < count) {
-          int randomNumber;
-          do {
-            randomNumber = random.nextInt(max - min + 1) + min;
-          } while (randomNumber % 17 == 0 || numbers.contains(randomNumber));
-          numbers.add(randomNumber);
-        }
-        return numbers;
+      List<Integer> numbers = new ArrayList<>();
+      Random random = new Random();
+      while (numbers.size() < count) {
+        int randomNumber;
+        do {
+          randomNumber = random.nextInt(max - min + 1) + min;
+        } while (randomNumber % 17 == 0 || numbers.contains(randomNumber));
+        numbers.add(randomNumber);
       }
+      return numbers;
+    }
 
     private void initialiseNuages(PlateauGraphique plateauGraphique){
-        List<Integer> pos = generateUniqueRandomNumbers(30, 86, 220);
-        int i = 0; 
-        for (int number : pos) {
-            Piece currPiece;
-            if (i <= 15) {
-              currPiece = new NuageEau(plateauGraphique.getCases()[number].getName());
-            } else {
-              currPiece = new NuageMet(plateauGraphique.getCases()[number].getName());
-            }
-            Pieces.add(currPiece);
-            i++;
+      List<Integer> pos = generateUniqueRandomNumbers(30, 86, 220);
+      int i = 0; 
+      for (int number : pos) {
+        Piece currPiece;
+        if (i <= 15) {
+          currPiece = new NuageEau(plateauGraphique.getCases()[number].getName());
+        } else {
+          currPiece = new NuageMet(plateauGraphique.getCases()[number].getName());
         }
+        Pieces.add(currPiece);
+        i++;
+      }
     }
 
     private void initialisePieces(PlateauGraphique plateauGraphique){
-        initialiseNuages(plateauGraphique);
-        Piece vehicleToAdd = new VehiculeEau(Color.BLACK,"none");
-        for (int index = 0; index < plateauGraphique.getTotalCase() ; index++){
-            if (((index >= 18 && index <= 33) || (index >= 52 && index <= 85)) && (index % 2 == 0) && (index!= 68)){
-                Pieces.add(new Glace(Color.RED, plateauGraphique.getCases()[index].getName()));
-            }
-            if (((index >= 222 && index <= 254) || (index >= 272 && index <= 288)) && (index % 2 != 0)){
-                Pieces.add(new Glace(Color.GREEN, plateauGraphique.getCases()[index].getName()));
-            }
-            if ((index >= 35 && index <= 51) && (index % 2 == 0)) {
-                if (vehicleToAdd instanceof VehiculeEau){
-                    Pieces.add(new VehiculeEau(Color.RED, plateauGraphique.getCases()[index].getName()));
-                    vehicleToAdd = new VehiculeMet(Color.BLACK, "none");
-                }else{
-                    Pieces.add(new VehiculeMet(Color.RED, plateauGraphique.getCases()[index].getName()));
-                    vehicleToAdd = new VehiculeEau(Color.BLACK, "none");  
-                }
-            }
-            if (index == 100){vehicleToAdd = new VehiculeMet(Color.BLACK, "none");}
-            if ((index >= 256 && index <= 271) && (index % 2 != 0)) {
-                if (vehicleToAdd instanceof VehiculeEau){
-                    Pieces.add(new VehiculeEau(Color.GREEN, plateauGraphique.getCases()[index].getName()));
-                    vehicleToAdd = new VehiculeMet(Color.BLACK, "none");
-                }else{
-                    Pieces.add(new VehiculeMet(Color.GREEN, plateauGraphique.getCases()[index].getName()));
-                    vehicleToAdd = new VehiculeEau(Color.BLACK,"none");  
-                }
-            }
-        }  
+      initialiseNuages(plateauGraphique);
+      Piece vehicleToAdd = new VehiculeEau(Color.BLACK,"none");
+      for (int index = 0; index < plateauGraphique.getTotalCase() ; index++){
+          if (((index >= 18 && index <= 33) || (index >= 52 && index <= 85)) && (index % 2 == 0) && (index!= 68)){
+              Pieces.add(new Glace(Color.RED, plateauGraphique.getCases()[index].getName()));
+          }
+          if (((index >= 222 && index <= 254) || (index >= 272 && index <= 288)) && (index % 2 != 0)){
+              Pieces.add(new Glace(Color.GREEN, plateauGraphique.getCases()[index].getName()));
+          }
+          if ((index >= 35 && index <= 51) && (index % 2 == 0)) {
+              if (vehicleToAdd instanceof VehiculeEau){
+                  Pieces.add(new VehiculeEau(Color.RED, plateauGraphique.getCases()[index].getName()));
+                  vehicleToAdd = new VehiculeMet(Color.BLACK, "none");
+              }else{
+                  Pieces.add(new VehiculeMet(Color.RED, plateauGraphique.getCases()[index].getName()));
+                  vehicleToAdd = new VehiculeEau(Color.BLACK, "none");  
+              }
+          }
+          if (index == 100){vehicleToAdd = new VehiculeMet(Color.BLACK, "none");}
+          if ((index >= 256 && index <= 271) && (index % 2 != 0)) {
+              if (vehicleToAdd instanceof VehiculeEau){
+                  Pieces.add(new VehiculeEau(Color.GREEN, plateauGraphique.getCases()[index].getName()));
+                  vehicleToAdd = new VehiculeMet(Color.BLACK, "none");
+              }else{
+                  Pieces.add(new VehiculeMet(Color.GREEN, plateauGraphique.getCases()[index].getName()));
+                  vehicleToAdd = new VehiculeEau(Color.BLACK,"none");  
+              }
+          }
+      }  
     }
 
 
     private Boolean checkForGlace(String caseNameToCheck){
-        for (Piece piece : Pieces){
-            if ((piece.getToPrint().equals("G")) && (piece.getCurrCase().equals(caseNameToCheck))){
-                return false;
-            }
+      for (Piece piece : Pieces){
+        if ((piece.getToPrint().equals("G")) && (piece.getCurrCase().equals(caseNameToCheck))){
+            return false;
         }
-        return true;
+      }
+      return true;
     }
 
     private String findRightChar(String currentChar, int way) {
@@ -210,9 +202,6 @@ public class PlateauLogique {
         return ""; 
     }
 
-
-
-
   public Vector<Piece> selectPiecesToDestroy(Piece pieceArrivante, String caseDestination){
     // Si un nuage arrive 
     Vector<Piece> toDestroy = new Vector<>(); 
@@ -236,8 +225,6 @@ public class PlateauLogique {
         }
       }
     }
-
-
 
     // Si un vehicule arrive
       // Sur un nuage de son type
