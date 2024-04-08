@@ -44,7 +44,9 @@ public class Case extends JLabel {
   public void updateDisplay(Piece pieceToAdd) {
     addStringToDisplay(pieceToAdd.getToPrint());
     if (displayCase.length()>2){
-      this.fontColor = Color.BLACK; 
+      if (!pieceToAdd.getPlayer().equals(this.fontColor)){
+        this.fontColor = Color.BLACK;
+      }
       this.font = new Font("Arial", Font.PLAIN, fontSize/displayCase.length()+7);
     }else{ 
     this.fontColor = pieceToAdd.getPlayer();
