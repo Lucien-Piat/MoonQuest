@@ -15,9 +15,7 @@ public abstract class Vehicule extends Piece {
         } 
     }
 
-    public int getCaptures(){
-        return this.captures; 
-    }
+    public int getCaptures(){return this.captures;}
 
     @Override
     public boolean isAcitive(){
