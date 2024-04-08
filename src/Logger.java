@@ -2,8 +2,10 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.util.Vector;
 
+import javax.management.StringValueExp;
 import javax.swing.*;
 
+import objets.pieces.Glace;
 import objets.pieces.abstract_class.*;
 import objets.plateau.PlateauLogique;
 

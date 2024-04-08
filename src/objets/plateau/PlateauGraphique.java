@@ -115,7 +115,6 @@ public class PlateauGraphique extends JFrame {
         return cases[0]; 
     }
 
-
     public void updateDisplay(PlateauLogique plateau){
         for (Case currCase : cases){
             currCase.clearDisplay();
@@ -124,6 +123,4 @@ public class PlateauGraphique extends JFrame {
             findCaseWithName(piece.getCurrCase()).updateDisplay(piece);
         }
     }
-
-
 }
