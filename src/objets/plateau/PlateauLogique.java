@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.Vector;
 
+import io.PlateauGraphique;
+
 import java.awt.Color;
 
 import objets.pieces.*;

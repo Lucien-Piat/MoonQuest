@@ -1,11 +1,10 @@
+package io;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.util.Vector;
 
-import javax.management.StringValueExp;
 import javax.swing.*;
 
-import objets.pieces.Glace;
 import objets.pieces.abstract_class.*;
 import objets.plateau.PlateauLogique;
 
@@ -46,6 +45,10 @@ public class Logger {
         return scorePlayer1 + "-" + scorePlayer2;
     }
 
+    public String getLastEntery(){
+        return completeLog.elementAt(completeLog.size() - 1);
+    }
+
     public void newLogEntery(String turnLog, PlateauLogique plateau_logique) {
         computeScore(plateau_logique);
         String entry = String.valueOf(turn++) + ". " + turnLog + " - " + computeScore(plateau_logique);
@@ -77,5 +80,11 @@ public class Logger {
             return true; 
         }
         return false; 
+    }
+
+    public void printLogInConsole(){
+        for (String entry : completeLog) {
+            System.out.println(entry);
+        }
     }
 }

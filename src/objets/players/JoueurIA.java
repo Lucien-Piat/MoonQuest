@@ -11,12 +11,10 @@ import objets.plateau.PlateauLogique;
 
 public class JoueurIA extends Joueur {
 
-    private int numeroJoueur;
     private Color team; 
 
-    public JoueurIA(Color team, int numeroJoueur){
+    public JoueurIA(Color team){
         this.team = team;
-        this.numeroJoueur = numeroJoueur;
     }
 
     private Piece selectRandomPiece(PlateauLogique board) {
@@ -43,7 +41,7 @@ public class JoueurIA extends Joueur {
 
   public String joue(PlateauLogique board){
     String log = "";
-    if (!rapide){waitForConfirmation("C'est le tour du joueur IA " + numeroJoueur);}
+    if (!rapide){waitForConfirmation("C'est le tour du joueur IA ");}
     Piece randomPiece = selectRandomPiece(board); 
     int distance = 1;
     if (randomPiece.isAcitive()){distance=2;}

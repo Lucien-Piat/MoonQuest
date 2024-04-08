@@ -22,7 +22,7 @@ public class Nuage extends Piece {
     @Override
     public String move(){
         Random random = new Random();
-        if (random.nextInt(5) == 0) { // 0 to 4 (inclusive)
+        if (random.nextInt(5) == 0) { 
             Random random2 = new Random();
             int randomIndex = random2.nextInt(directions.length);
             return directions[randomIndex];

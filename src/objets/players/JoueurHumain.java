@@ -3,37 +3,60 @@ package objets.players;
 import java.awt.Color;
 import java.util.Vector;
 
+import javax.swing.*;
+
 import objets.pieces.abstract_class.Piece;
 import objets.plateau.PlateauLogique;
 
 public class JoueurHumain extends Joueur {
 
-    private int numeroJoueur;
     private Color team; 
+    private String couleur ; 
 
-    public JoueurHumain(Color team, int numeroJoueur){
+    public JoueurHumain(Color team){
         this.team = team;
-        this.numeroJoueur = numeroJoueur;
+        if(this.team.equals(Color.GREEN)){this.couleur="Vert";}else{this.couleur="Rouge";}
+        
     }
+
+    public String askCase() {
+        JTextField directionField = new JTextField(10);
+        JLabel message = new JLabel("Donnez le numero de la case a jouer");
+        JPanel panel = new JPanel();
+        panel.add(message);
+        panel.add(directionField);
+        int result = JOptionPane.showConfirmDialog(null, panel, "C'est votre tour joueur "+couleur, JOptionPane.OK_CANCEL_OPTION);
+        String direction = null;
+        if (result == JOptionPane.OK_OPTION) {
+          direction = directionField.getText().trim();
+        }
+        return direction;
+    }
+
 
     public String joue(PlateauLogique board){
         String log, caseDestination = "";
-        waitForConfirmation("C'est le tour du joueur " + numeroJoueur);
+        
         Vector<Piece> toDestroy = new Vector<>();
-        while (true){
-            String caseOrigine = askCase();
+        String caseOrigine= null; 
+        boolean keepLooping = true;
+        while (keepLooping) {
+            caseOrigine = askCase();
             for (Piece currPiece : board.getPieces()){
-                if ((currPiece.getCurrCase().equals(caseOrigine)) &&  currPiece.getPlayer().equals(this.team)){
-                    int distance = 1;
-                    if (currPiece.isAcitive()){distance=2;}
-                    caseDestination = board.deplacePiece(caseOrigine,currPiece.move(),distance,currPiece,currPiece.isGlace());
-                    toDestroy = board.selectPiecesToDestroy(currPiece, caseDestination);
-                }
+                if (currPiece.getCurrCase().equals(caseOrigine)){keepLooping = false;}
             }
-            log = board.applyRules(toDestroy); 
-            log = board.spitOutLog(caseOrigine, caseDestination, log); 
-            waitForConfirmation("Case invalide");
-            return log; 
         }
+
+        for (Piece currPiece : board.getPieces()){
+            if ((currPiece.getCurrCase().equals(caseOrigine)) &&  currPiece.getPlayer().equals(this.team)){
+                int distance = 1;
+                if (currPiece.isAcitive()){distance=2;}
+                caseDestination = board.deplacePiece(caseOrigine,currPiece.move(),distance,currPiece,currPiece.isGlace());
+                toDestroy = board.selectPiecesToDestroy(currPiece, caseDestination);
+            }
+        }
+        log = board.applyRules(toDestroy);
+        log = board.spitOutLog(caseOrigine, caseDestination, log); 
+        return log; 
     }
 }

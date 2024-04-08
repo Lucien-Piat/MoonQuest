@@ -1,4 +1,4 @@
-package objets.plateau;
+package io;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -7,6 +7,7 @@ import java.util.List;
 import javax.swing.JFrame;
 
 import objets.pieces.abstract_class.Piece;
+import objets.plateau.PlateauLogique;
 
 /**
  * Représente le plateau de jeu.

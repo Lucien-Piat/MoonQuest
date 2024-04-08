@@ -1,4 +1,4 @@
-package objets.plateau;
+package io;
 
 import java.awt.Color;
 import java.awt.Font;
