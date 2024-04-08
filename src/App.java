@@ -47,8 +47,9 @@ public class App {
 
         Joueur.setRapide();
 
-        for (int i = 0; i<100; i++){
+        for (int i = 0; i<200; i++){
             tour(player1, player2, nuage,  plateau_graphique, plateau_logique, logs); 
         }
+        logs.galceNum(plateau_logique);
     }
 }
