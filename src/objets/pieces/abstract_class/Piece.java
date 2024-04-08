@@ -7,9 +7,10 @@ import javax.swing.*;
 public abstract class Piece {
 
     protected String toPrint; 
+    protected String currCase;
     protected Color player = Color.BLACK;
     final static String[] directions = {"nord", "est", "sud", "ouest", "nord_ouest", "nord_est", "sud_est", "sud_ouest"};
-    protected String currCase; 
+     
 
     public Piece(String toPrint, String caseDepart){
         this.toPrint = toPrint;    
@@ -69,5 +70,4 @@ public abstract class Piece {
         }
         return "invalid";
     }
-    
 }
