@@ -227,10 +227,26 @@ public class PlateauLogique {
     }
 
     // Si un vehicule arrive
-      // Sur un nuage de son type
-      // Sur un autre chose
-
-    
+    if (pieceArrivante instanceof Vehicule){
+      for (Piece piece : Pieces){
+        if((piece.getCurrCase().equals(caseDestination)) && (!piece.equals(pieceArrivante)) && (!piece.getPlayer().equals(pieceArrivante.getPlayer()))){
+          if(piece instanceof Nuage) {
+            if (piece.getToPrint().substring(1, 2).equals(pieceArrivante.getToPrint().substring(1, 2))){
+              toDestroy.add(piece);
+              ((Vehicule) pieceArrivante).addCapture();
+              System.out.println("Console : Capture en "+caseDestination);
+            }else{
+              toDestroy.add(pieceArrivante);
+              System.out.println("Console : Nuage d'un mauvais type. Destruction en "+caseDestination);
+            }
+          }
+          if(piece instanceof Glace){
+            toDestroy.add(pieceArrivante);
+            System.out.println("Console : Destruction en "+caseDestination);
+          }
+        }
+      }
+    }
     return toDestroy;
   }
   
