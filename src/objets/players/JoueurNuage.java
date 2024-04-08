@@ -9,13 +9,14 @@ import objets.plateau.PlateauLogique;
 
 public class JoueurNuage extends Joueur{
 
+  
   public JoueurNuage(){
     
   }
 
   public String joue(PlateauLogique board){
     String log = ""; 
-    //waitForConfirmation("C'est le tour des Nuages");
+    if (!rapide){waitForConfirmation("C'est le tour des Nuages");}
     Vector<Piece> toDestroy = new Vector<>();
     for (Piece currPiece : board.getPieces()){
       if (currPiece instanceof Nuage){

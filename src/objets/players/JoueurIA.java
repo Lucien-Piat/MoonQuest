@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Vector;
+
 
 import objets.pieces.abstract_class.Piece;
 import objets.plateau.PlateauLogique;
@@ -43,7 +43,7 @@ public class JoueurIA extends Joueur {
 
   public String joue(PlateauLogique board){
     String log = "";
-    //waitForConfirmation("C'est le tour du joueur IA " + numeroJoueur);
+    if (!rapide){waitForConfirmation("C'est le tour du joueur IA " + numeroJoueur);}
     Piece randomPiece = selectRandomPiece(board); 
     int distance = 1;
     if (randomPiece.isAcitive()){distance=2;}
