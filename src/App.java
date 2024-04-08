@@ -34,7 +34,7 @@ public class App {
         plateau_graphique.display();
 
 
-        JoueurIA player1 = new JoueurIA(Color.GREEN,1);
+        JoueurIA player1 = new JoueurIA(Color.GREEN, 1);
         JoueurIA player2 = new JoueurIA(Color.RED, 2);
         JoueurNuage nuage = new JoueurNuage(); 
 
