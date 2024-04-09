@@ -30,10 +30,7 @@ public abstract class Vehicule extends Piece {
         int distance = 1;
         if (isAcitive()){distance=2;}
         while (true) {
-            String directionChoisie = askDirection(distance);
-            if (!passDirectionifValid(directionChoisie, distance).equals("invalid")){
-                return directionChoisie; 
-            }
+            return askDirection(distance);
         }
     }
 }

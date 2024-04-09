@@ -46,28 +46,38 @@ public abstract class Piece {
         return false;
     }
 
-    public static String askDirection(int distance) {
-        JTextField directionField = new JTextField(10);
-        String text = "nord, est, sud, ouest";
-        if (distance == 2){text = "nord, nord_est, est, sud_est...";}
-        JLabel directionLabel = new JLabel(text);
-        JPanel panel = new JPanel();
-        panel.add(directionLabel);
-        panel.add(directionField);
-        int result = JOptionPane.showConfirmDialog(null, panel, "Choisisez une direction", JOptionPane.OK_CANCEL_OPTION);
-        String direction = null;
-        if (result == JOptionPane.OK_OPTION) {
-          direction = directionField.getText().trim();
+    public String askDirection(int distance) {
+        String[] options = {"⬆", "⮕", "⬆", "⬅"};
+        String[] options_vol = {"⬆", "⮕", "⬆", "⬅", "⬉", "⬈", "⬊", "⬋"};
+        if (distance==2){
+            options = options_vol;
         }
-        return direction;
-    }
-
-    protected String passDirectionifValid(String potentialDirection, int distance){
-        for (String direction : directions){
-            if (potentialDirection.equals(direction)){
-                return direction;
-            } 
+        int choice = JOptionPane.showOptionDialog(null, "Ou votre piece en "+currCase+" doit elle aller ?", "Choix du déplacement", JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+        if (choice == 0) {
+            return "nord";
         }
-        return "invalid";
+        if (choice == 1) {
+            return "est";
+        } 
+        if (choice == 2) {
+            return "sud";
+        } 
+        if (choice == 3) {
+            return "ouest";
+        } 
+        if (choice == 4) {
+            return "nord_ouest";
+        } 
+        if (choice == 5) {
+            return "nord_est";
+        } 
+        if (choice == 6) {
+            return "sud_est";
+        } 
+        if (choice == 7) {
+            return "sud_ouest";
+        }
+        return "";
     }
 }

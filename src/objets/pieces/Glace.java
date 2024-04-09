@@ -13,10 +13,7 @@ public class Glace extends Piece {
 
     public String move(){
         while (true) {
-            String directionChoisie = askDirection(1);
-            if (!passDirectionifValid(directionChoisie, 1).equals("invalid")){
-                return directionChoisie; 
-            }
+            return askDirection(1);
         }
     }
 }

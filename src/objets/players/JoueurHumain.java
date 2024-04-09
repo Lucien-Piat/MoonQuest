@@ -21,7 +21,7 @@ public class JoueurHumain extends Joueur {
 
     public String askCase() {
         JTextField directionField = new JTextField(10);
-        JLabel message = new JLabel("Donnez le numero de la case a jouer");
+        JLabel message = new JLabel("Donnez le numero de la case à jouer");
         JPanel panel = new JPanel();
         panel.add(message);
         panel.add(directionField);
@@ -35,7 +35,7 @@ public class JoueurHumain extends Joueur {
 
 
     private int selectDistance() {
-        String[] options = {"Terrestre", "Aérien"};
+        String[] options = {"Terrestre (1 case)", "Aérien (2 cases)"};
         int choice = JOptionPane.showOptionDialog(null, "Votre véhicule est activé, choisisez le déplacement :", "Choix du déplacement", JOptionPane.DEFAULT_OPTION,
                 JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
         if (choice == 1) {
