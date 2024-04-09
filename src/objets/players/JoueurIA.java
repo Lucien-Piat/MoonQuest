@@ -11,47 +11,53 @@ import objets.plateau.PlateauLogique;
 
 public class JoueurIA extends Joueur {
 
-    private Color team; 
+    private Color team;
 
-    public JoueurIA(Color team){
+    public JoueurIA(Color team) {
         this.team = team;
     }
 
     private Piece selectRandomPiece(PlateauLogique board) {
         List<Piece> ownPieces = new ArrayList<>();
-      
+
         for (Piece piece : board.getPieces()) {
-          if (piece.getPlayer().equals(team)) {
-            ownPieces.add(piece);
-          }
+            if (piece.getPlayer().equals(team)) {
+                ownPieces.add(piece);
+            }
         }
-      
+
         Random random = new Random();
         int randomIndex = random.nextInt(ownPieces.size());
         return ownPieces.get(randomIndex);
-      }
-    
-    private String selectRandomDirection(int distance){
+    }
+
+    private String selectRandomDirection(int distance) {
         Random random = new Random();
         int randomIndex = random.nextInt(3);
-        if (distance == 1){randomIndex = random.nextInt(Piece.getAllDirections().length);}
+        if (distance == 1) {
+            randomIndex = random.nextInt(Piece.getAllDirections().length);
+        }
         return Piece.getAllDirections()[randomIndex];
     }
 
 
-  public String joue(PlateauLogique board){
-    String log = "";
-    if (!rapide){waitForConfirmation("C'est le tour du joueur IA ");}
-    Piece randomPiece = selectRandomPiece(board); 
-    int distance = 1;
-    if (randomPiece.isAcitive()){distance=2;}
-    String caseOrigine = randomPiece.getCurrCase();
-    String caseDestination = board.deplacePiece(caseOrigine, selectRandomDirection(distance),distance,randomPiece,randomPiece.isGlace());
-    log = board.applyRules(board.selectPiecesToDestroy(randomPiece, caseDestination));
-    log = board.spitOutLog(caseOrigine, caseDestination, log); 
-    return log; 
-  }
+    public String joue(PlateauLogique board) {
+        String log = "";
+        if (!rapide) {
+            waitForConfirmation("C'est le tour du joueur IA ");
+        }
+        Piece randomPiece = selectRandomPiece(board);
+        int distance = 1;
+        if (randomPiece.isAcitive()) {
+            distance = 2;
+        }
+        String caseOrigine = randomPiece.getCurrCase();
+        String caseDestination = board.deplacePiece(caseOrigine, selectRandomDirection(distance),
+                distance, randomPiece, randomPiece.isGlace());
+        log = board.applyRules(board.selectPiecesToDestroy(randomPiece, caseDestination));
+        log = board.spitOutLog(caseOrigine, caseDestination, log);
+        return log;
+    }
 }
 
-   
-  
+

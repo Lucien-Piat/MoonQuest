@@ -8,16 +8,17 @@ public abstract class Joueur {
 
     static Boolean rapide = false;
 
-    public static void setRapide(){
+    public static void setRapide() {
         rapide = !rapide;
     }
 
     protected void waitForConfirmation(String message) {
-        JOptionPane.showMessageDialog(null, message, "Attention !", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, message, "Attention !",
+                JOptionPane.INFORMATION_MESSAGE);
     }
 
 
-    public String joue(PlateauLogique board){
+    public String joue(PlateauLogique board) {
         return "";
     }
 }

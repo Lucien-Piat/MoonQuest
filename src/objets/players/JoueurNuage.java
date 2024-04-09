@@ -7,24 +7,27 @@ import objets.pieces.abstract_class.Piece;
 
 import objets.plateau.PlateauLogique;
 
-public class JoueurNuage extends Joueur{
+public class JoueurNuage extends Joueur {
 
-  
-  public JoueurNuage(){
-    
-  }
 
-  public String joue(PlateauLogique board){
-    String log = ""; 
-    if (!rapide){waitForConfirmation("C'est le tour des Nuages");}
-    Vector<Piece> toDestroy = new Vector<>();
-    for (Piece currPiece : board.getPieces()){
-      if (currPiece instanceof Nuage){
-        String caseDestination = board.deplacePiece(currPiece.getCurrCase(),currPiece.move(),2,currPiece, false); 
-        toDestroy.addAll(board.selectPiecesToDestroy(currPiece, caseDestination));
-      }
+    public JoueurNuage() {
+
     }
-    board.applyRules(toDestroy); 
-    return log;
-  }
+
+    public String joue(PlateauLogique board) {
+        String log = "";
+        if (!rapide) {
+            waitForConfirmation("C'est le tour des Nuages");
+        }
+        Vector<Piece> toDestroy = new Vector<>();
+        for (Piece currPiece : board.getPieces()) {
+            if (currPiece instanceof Nuage) {
+                String caseDestination = board.deplacePiece(currPiece.getCurrCase(),
+                        currPiece.move(), 2, currPiece, false);
+                toDestroy.addAll(board.selectPiecesToDestroy(currPiece, caseDestination));
+            }
+        }
+        board.applyRules(toDestroy);
+        return log;
+    }
 }

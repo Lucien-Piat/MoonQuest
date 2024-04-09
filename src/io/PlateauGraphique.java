@@ -19,15 +19,14 @@ public class PlateauGraphique extends JFrame {
     private int totalCases = boardSize * boardSize;
 
     /**
-     * Constructeur de la classe Plateau.
-     * Initialise le plateau de jeu.
+     * Constructeur de la classe Plateau. Initialise le plateau de jeu.
      */
     public PlateauGraphique() {
         cases = new Case[totalCases]; // Initialise les cases du plateau
         initialiseCase();
     }
 
-    private void initialiseCase(){
+    private void initialiseCase() {
         // Création de listes pour les noms des cases
         List<Character> lettreList = new ArrayList<>();
         char lettre = 'A';
@@ -55,20 +54,28 @@ public class PlateauGraphique extends JFrame {
                 cases[index] = new Case(new Color(50, 50, 50), "Coin", index);
             } else if (currentRow == 0) {
                 // Si c'est la premiere ligne
-                cases[index] = new Case(new Color(180, 169, 169), String.valueOf(lettreList.get(currentColumn - 1)),index);
+                cases[index] = new Case(new Color(180, 169, 169),
+                        String.valueOf(lettreList.get(currentColumn - 1)), index);
                 cases[index].setNameAsDisplay();
                 cases[index].setSide();
             } else if (currentColumn == 0) {
                 // Si c'est la premiere colonne
-                cases[index] = new Case(new Color(180, 169, 169), String.valueOf(currentRow),index);
+                cases[index] =
+                        new Case(new Color(180, 169, 169), String.valueOf(currentRow), index);
                 cases[index].setNameAsDisplay();
                 cases[index].setSide();
             } else {
                 // Si la case est dans le plateau (on alterne les couleurs)
                 if (colorToChoose) {
-                    cases[index] = new Case(new Color(222, 184, 135), String.valueOf(lettreList.get(currentColumn - 1))+String.valueOf(currentRow),index);
+                    cases[index] = new Case(new Color(222, 184, 135),
+                            String.valueOf(lettreList.get(currentColumn - 1))
+                                    + String.valueOf(currentRow),
+                            index);
                 } else {
-                    cases[index] = new Case(new Color(139, 69, 19), String.valueOf(lettreList.get(currentColumn - 1))+String.valueOf(currentRow),index);
+                    cases[index] = new Case(new Color(139, 69, 19),
+                            String.valueOf(lettreList.get(currentColumn - 1))
+                                    + String.valueOf(currentRow),
+                            index);
 
                 }
                 colorToChoose = !colorToChoose; // Basculer la couleur pour la case suivante
@@ -77,18 +84,18 @@ public class PlateauGraphique extends JFrame {
         }
     }
 
-    public Case[] getCases(){
+    public Case[] getCases() {
         return cases;
     }
 
-    public int getBoardSize(){
-        return boardSize; 
+    public int getBoardSize() {
+        return boardSize;
     }
 
-    public int getTotalCase(){
-        return totalCases; 
+    public int getTotalCase() {
+        return totalCases;
     }
-        
+
     /**
      * Affiche le plateau de jeu.
      */
@@ -104,23 +111,25 @@ public class PlateauGraphique extends JFrame {
             cases[index].set();
             contentPane.add(cases[index]);
         }
-        super.setSize(800,800);
+        super.setSize(800, 800);
         super.setLocationRelativeTo(null);
         super.setVisible(true);
     }
 
-    public Case findCaseWithName(String name){
-        for (Case currCase : cases){
-            if (currCase.getName().equals(name)){return currCase;}
+    public Case findCaseWithName(String name) {
+        for (Case currCase : cases) {
+            if (currCase.getName().equals(name)) {
+                return currCase;
+            }
         }
-        return cases[0]; 
+        return cases[0];
     }
 
-    public void updateDisplay(PlateauLogique plateau){
-        for (Case currCase : cases){
+    public void updateDisplay(PlateauLogique plateau) {
+        for (Case currCase : cases) {
             currCase.clearDisplay();
         }
-        for (Piece piece : plateau.getPieces()){
+        for (Piece piece : plateau.getPieces()) {
             findCaseWithName(piece.getCurrCase()).updateDisplay(piece);
         }
     }
