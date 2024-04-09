@@ -12,22 +12,43 @@ import java.awt.Color;
 import objets.pieces.*;
 import objets.pieces.abstract_class.*;
 
+/**
+ * La classe PlateauLogique représente le plateau de jeu logique.
+ * Elle implémente toutes les régles et gére le dépplacement. 
+ */
 public class PlateauLogique {
 
     private Vector<Piece> Pieces;
     private int boardSize;
 
+    /**
+     * Constructeur de la classe PlateauLogique.
+     * 
+     * @param plateauGraphique Le plateau graphique associé.
+     */
     public PlateauLogique(PlateauGraphique plateauGraphique) {
         this.Pieces = new Vector<>();
         initialisePieces(plateauGraphique);
         boardSize = plateauGraphique.getBoardSize();
-
     }
 
+    /**
+     * Renvoie la liste des pièces sur le plateau.
+     * 
+     * @return La liste des pièces.
+     */
     public Vector<Piece> getPieces() {
         return Pieces;
     }
 
+    /**
+     * Génère une liste de nombres aléatoires uniques dans une plage spécifiée.
+     * 
+     * @param count Le nombre de nombres à générer.
+     * @param min La valeur minimale possible.
+     * @param max La valeur maximale possible.
+     * @return Une liste de nombres aléatoires uniques dans la plage spécifiée.
+     */
     private List<Integer> generateUniqueRandomNumbers(int count, int min, int max) {
         List<Integer> numbers = new ArrayList<>();
         Random random = new Random();
@@ -41,6 +62,11 @@ public class PlateauLogique {
         return numbers;
     }
 
+    /**
+     * Initialise les nuages sur le plateau.
+     * 
+     * @param plateauGraphique Le plateau graphique associé.
+     */
     private void initialiseNuages(PlateauGraphique plateauGraphique) {
         List<Integer> pos = generateUniqueRandomNumbers(30, 86, 220);
         int i = 0;
@@ -56,6 +82,11 @@ public class PlateauLogique {
         }
     }
 
+    /**
+     * Initialise toutes les pièces sur le plateau.
+     * 
+     * @param plateauGraphique Le plateau graphique associé.
+     */
     private void initialisePieces(PlateauGraphique plateauGraphique) {
         initialiseNuages(plateauGraphique);
         Piece vehicleToAdd = new VehiculeEau(Color.BLACK, "none");
@@ -97,15 +128,28 @@ public class PlateauLogique {
     }
 
 
+    /**
+     * Vérifie si une case contient déjà une glace.
+     * 
+     * @param caseNameToCheck Le nom de la case à vérifier.
+     * @return True si la case ne contient pas de glace, sinon False.
+     */
     private Boolean checkForGlace(String caseNameToCheck) {
         for (Piece piece : Pieces) {
-            if ((piece.getToPrint().equals("G")) && (piece.getCurrCase().equals(caseNameToCheck))) {
+            if ((piece instanceof Glace) && (piece.getCurrCase().equals(caseNameToCheck))) {
                 return false;
             }
         }
         return true;
     }
 
+    /**
+     * Trouve le caractère correct à droite ou à gauche du caractère spécifié.
+     * 
+     * @param currentChar le caractère actuel
+     * @param way         la direction dans laquelle rechercher (-1 pour la gauche, 1 pour la droite)
+     * @return le caractère correct après le décalage
+     */
     private String findRightChar(String currentChar, int way) {
         String[] alphabetArray = new String[boardSize - 1];
         String[] numArray = new String[boardSize - 1];
@@ -136,6 +180,13 @@ public class PlateauLogique {
                 : numArray[newIndex];
     }
 
+    /**
+     * Déplace une case dans une direction spécifiée.
+     * 
+     * @param direction     la direction du déplacement ("up", "down", "left", "right")
+     * @param caseOrigineNom le nom de la case d'origine
+     * @return le nom de la case après le déplacement
+     */
     private String moveOneCase(String direction, String caseOrigineNom) {
         String letterChar = caseOrigineNom.substring(0, 1);
         String numChar = caseOrigineNom.substring(1);
@@ -153,6 +204,14 @@ public class PlateauLogique {
         }
     }
 
+        /**
+     * Déplace une case dans toutes les directions spécifiées.
+     * 
+     * @param caseOrigineName le nom de la case d'origine
+     * @param direction       la direction du déplacement
+     * @param boardSize       la taille du plateau
+     * @return le nom de la case après le déplacement dans toutes les directions
+     */
     public String moveOneCaseAllDirections(String caseOrigineName, String direction,
             int boardSize) {
         String destination = caseOrigineName;
@@ -187,7 +246,16 @@ public class PlateauLogique {
         return destination;
     }
 
-
+    /**
+     * Déplace une pièce sur le plateau vers une case spécifiée.
+     * 
+     * @param caseOrigine  le nom de la case d'origine
+     * @param direction    la direction du mouvement
+     * @param distance     la distance à parcourir (1 ou 2)
+     * @param pieceToMove  la pièce à déplacer
+     * @param isGlace      true si la case de destination est une glace, sinon false
+     * @return le nom de la case de destination après le déplacement
+     */
     public String deplacePiece(String caseOrigine, String direction, int distance,
             Piece pieceToMove, Boolean isGlace) {
         String destination = caseOrigine;
@@ -216,6 +284,13 @@ public class PlateauLogique {
         return "";
     }
 
+    /**
+     * Sélectionne les pièces à détruire en fonction de la pièce arrivante et de sa destination.
+     * 
+     * @param pieceArrivante  la pièce qui arrive sur la case de destination
+     * @param caseDestination le nom de la case de destination
+     * @return une liste des pièces à détruire
+     */
     public Vector<Piece> selectPiecesToDestroy(Piece pieceArrivante, String caseDestination) {
         // Si un nuage arrive
         Vector<Piece> toDestroy = new Vector<>();
@@ -269,6 +344,13 @@ public class PlateauLogique {
         return toDestroy;
     }
 
+    /**
+     * Applique les règles du jeu en détruisant les pièces spécifiées.
+     * 
+     * @param toDestroy une liste des pièces à détruire
+     * @return une chaîne de caractères indiquant le résultat de l'application des règles
+     *         (" x " si des pièces ont été détruites, sinon " . ")
+     */
     public String applyRules(Vector<Piece> toDestroy) {
         for (Piece pieceToDestroy : toDestroy) {
             Pieces.remove(pieceToDestroy);
@@ -279,6 +361,14 @@ public class PlateauLogique {
         return " . ";
     }
 
+    /**
+     * Génère un journal des mouvements effectués sur le plateau.
+     * 
+     * @param caseOrigine       le nom de la case d'origine du mouvement
+     * @param caseDestination   le nom de la case de destination du mouvement
+     * @param applyRulesLog     le résultat de l'application des règles (chaîne de caractères)
+     * @return une chaîne de caractères représentant le journal des mouvements effectués
+     */
     public String spitOutLog(String caseOrigine, String caseDestination, String applyRulesLog) {
         return caseOrigine + " - " + caseDestination + applyRulesLog;
     }

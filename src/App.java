@@ -21,7 +21,7 @@ public class App {
 
         if ((player1 instanceof JoueurIA) && (player2 instanceof JoueurIA)) {
             try {
-                Thread.sleep(0);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -57,7 +57,7 @@ public class App {
     }
 
     private static void selectSpeed() {
-        String[] options = {"Parie normale", "Partie rapide (conseillé en IA vs. AI)"};
+        String[] options = {"Parie normale", "Partie rapide (Pas de fenêtres de dialogue, conseillé en IA vs. AI)"};
         int choice = JOptionPane.showOptionDialog(null, "Choisisez la vitese du jeu",
                 "Paramétrage de la partie", JOptionPane.DEFAULT_OPTION,
                 JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
