@@ -13,8 +13,8 @@ import objets.pieces.*;
 import objets.pieces.abstract_class.*;
 
 /**
- * La classe PlateauLogique représente le plateau de jeu logique.
- * Elle implémente toutes les régles et gére le dépplacement. 
+ * La classe PlateauLogique représente le plateau de jeu logique. Elle implémente toutes les régles
+ * et gére le dépplacement.
  */
 public class PlateauLogique {
 
@@ -147,7 +147,7 @@ public class PlateauLogique {
      * Trouve le caractère correct à droite ou à gauche du caractère spécifié.
      * 
      * @param currentChar le caractère actuel
-     * @param way         la direction dans laquelle rechercher (-1 pour la gauche, 1 pour la droite)
+     * @param way la direction dans laquelle rechercher (-1 pour la gauche, 1 pour la droite)
      * @return le caractère correct après le décalage
      */
     private String findRightChar(String currentChar, int way) {
@@ -183,7 +183,7 @@ public class PlateauLogique {
     /**
      * Déplace une case dans une direction spécifiée.
      * 
-     * @param direction     la direction du déplacement ("up", "down", "left", "right")
+     * @param direction la direction du déplacement ("up", "down", "left", "right")
      * @param caseOrigineNom le nom de la case d'origine
      * @return le nom de la case après le déplacement
      */
@@ -204,12 +204,12 @@ public class PlateauLogique {
         }
     }
 
-        /**
+    /**
      * Déplace une case dans toutes les directions spécifiées.
      * 
      * @param caseOrigineName le nom de la case d'origine
-     * @param direction       la direction du déplacement
-     * @param boardSize       la taille du plateau
+     * @param direction la direction du déplacement
+     * @param boardSize la taille du plateau
      * @return le nom de la case après le déplacement dans toutes les directions
      */
     public String moveOneCaseAllDirections(String caseOrigineName, String direction,
@@ -249,11 +249,11 @@ public class PlateauLogique {
     /**
      * Déplace une pièce sur le plateau vers une case spécifiée.
      * 
-     * @param caseOrigine  le nom de la case d'origine
-     * @param direction    la direction du mouvement
-     * @param distance     la distance à parcourir (1 ou 2)
-     * @param pieceToMove  la pièce à déplacer
-     * @param isGlace      true si la case de destination est une glace, sinon false
+     * @param caseOrigine le nom de la case d'origine
+     * @param direction la direction du mouvement
+     * @param distance la distance à parcourir (1 ou 2)
+     * @param pieceToMove la pièce à déplacer
+     * @param isGlace true si la case de destination est une glace, sinon false
      * @return le nom de la case de destination après le déplacement
      */
     public String deplacePiece(String caseOrigine, String direction, int distance,
@@ -287,7 +287,7 @@ public class PlateauLogique {
     /**
      * Sélectionne les pièces à détruire en fonction de la pièce arrivante et de sa destination.
      * 
-     * @param pieceArrivante  la pièce qui arrive sur la case de destination
+     * @param pieceArrivante la pièce qui arrive sur la case de destination
      * @param caseDestination le nom de la case de destination
      * @return une liste des pièces à détruire
      */
@@ -348,8 +348,8 @@ public class PlateauLogique {
      * Applique les règles du jeu en détruisant les pièces spécifiées.
      * 
      * @param toDestroy une liste des pièces à détruire
-     * @return une chaîne de caractères indiquant le résultat de l'application des règles
-     *         (" x " si des pièces ont été détruites, sinon " . ")
+     * @return une chaîne de caractères indiquant le résultat de l'application des règles (" x " si
+     *         des pièces ont été détruites, sinon " . ")
      */
     public String applyRules(Vector<Piece> toDestroy) {
         for (Piece pieceToDestroy : toDestroy) {
@@ -364,9 +364,9 @@ public class PlateauLogique {
     /**
      * Génère un journal des mouvements effectués sur le plateau.
      * 
-     * @param caseOrigine       le nom de la case d'origine du mouvement
-     * @param caseDestination   le nom de la case de destination du mouvement
-     * @param applyRulesLog     le résultat de l'application des règles (chaîne de caractères)
+     * @param caseOrigine le nom de la case d'origine du mouvement
+     * @param caseDestination le nom de la case de destination du mouvement
+     * @param applyRulesLog le résultat de l'application des règles (chaîne de caractères)
      * @return une chaîne de caractères représentant le journal des mouvements effectués
      */
     public String spitOutLog(String caseOrigine, String caseDestination, String applyRulesLog) {

@@ -15,7 +15,7 @@ public class JoueurNuage extends Joueur {
      * Constructeur de la classe JoueurNuage.
      */
     public JoueurNuage() {
-        
+
     }
 
     /**
@@ -25,7 +25,7 @@ public class JoueurNuage extends Joueur {
      * @return Une chaîne représentant l'action effectuée par le joueur Nuage.
      */
     public String joue(PlateauLogique board) {
-        String log = ""; 
+        String log = "";
 
         // Si le jeu n'est pas en mode rapide, attend une confirmation avant de jouer
         if (!rapide) {
