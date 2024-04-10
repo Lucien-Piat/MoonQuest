@@ -27,3 +27,33 @@ Assurez-vous d'avoir Java installé sur votre système pour exécuter ce jeu.
 ## Contex
 
 Ce projet a été réalisé dans le cadre du Master 1 Bioinformatique à l'université de Bordeaux
+
+# MoonQuest
+
+MoonQuest is a turn-based Java strategy game based on a board.
+
+## Prerequisites
+
+Make sure you have Java installed on your system to run this game.
+
+## Installation
+
+1. Download the MoonQuest.jar file.
+2. Run the game using the following command:
+
+    ```bash
+    java -jar MoonQuest.jar
+    ```
+
+## How to Play
+
+- At the start of the game, you will be prompted to choose a game mode from the available options: 1 Against 1, Player vs. AI, or AI vs. AI.
+- Then, choose the game speed: Normal Game or Fast Game (if you want to watch the game without intervening).
+- The game will start with the graphical board displayed on the screen.
+- Take turns playing with the other players or AI until the game ends.
+- The game ends when one of the end conditions is met, for example, when there is only one player left on the board.
+- Once the game is over, a pop-up window displaying the game result will appear.
+
+## Context
+
+This project was carried out as part of the Master's degree in Bioinformatics at the University of Bordeaux.
