@@ -14,6 +14,7 @@ Assurez-vous d'avoir Java installé sur votre système pour exécuter ce jeu.
     ```bash
     java -jar MoonQuest.jar
     ```
+3. Sinon, téléchargez le .sh ou .bat et executez les dans le même dossier que MoonQuest.jar
 
 ## Comment jouer
 
