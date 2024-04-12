@@ -99,8 +99,8 @@ public abstract class Piece {
      * @return La direction de déplacement choisie.
      */
     public String askDirection(int distance) {
-        String[] options = {"⬆", "⮕", "⬆", "⬅"};
-        String[] options_vol = {"⬆", "⮕", "⬆", "⬅", "⬉", "⬈", "⬊", "⬋"};
+        String[] options = {"⬆", "⮕", "⬇", "⬅"};
+        String[] options_vol = {"⬆", "⮕", "⬇", "⬅", "⬉", "⬈", "⬊", "⬋"};
         if (distance == 2) {
             options = options_vol;
         }
