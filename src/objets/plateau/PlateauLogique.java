@@ -257,7 +257,7 @@ public class PlateauLogique {
      * @return le nom de la case de destination après le déplacement
      */
     public String deplacePiece(String caseOrigine, String direction, int distance,
-            Piece pieceToMove, Boolean isGlace) {
+        Piece pieceToMove, Boolean isGlace) {
         String destination = caseOrigine;
         destination = moveOneCaseAllDirections(caseOrigine, direction, boardSize);
         if (checkForGlace(destination) || isGlace || (distance == 1)) {
