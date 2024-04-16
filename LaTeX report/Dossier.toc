@@ -1,9 +1,0 @@
-\babel@toc {french}{}\relax 
-\contentsline {section}{\numberline {0.1}Introduction}{1}{section.0.1}%
-\contentsline {section}{\numberline {0.2}Analyse du Sujet}{1}{section.0.2}%
-\contentsline {section}{\numberline {0.3}Solutions Envisagées}{2}{section.0.3}%
-\contentsline {subsection}{\numberline {0.3.1}Pour Le Plateau}{2}{subsection.0.3.1}%
-\contentsline {subsection}{\numberline {0.3.2}Pour Les Objets}{2}{subsection.0.3.2}%
-\contentsline {subsection}{\numberline {0.3.3}Pour l’Affichage}{2}{subsection.0.3.3}%
-\contentsline {section}{\numberline {0.4}Algorithmes Choisis}{2}{section.0.4}%
-\contentsline {section}{\numberline {0.5}Conclusion}{2}{section.0.5}%
