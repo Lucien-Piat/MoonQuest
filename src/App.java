@@ -7,6 +7,8 @@ import io.PlateauGraphique;
 import objets.plateau.PlateauLogique;
 import objets.players.*;
 
+test hello
+
 /**
  * La classe principale qui initialise le jeu et contrôle son déroulement.
  */
